@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "AndroidLessons"
+rootProject.name = "Android_Lessons_Sergeev"
 include ':app'
 include ':p0041basicviews'
 include ':constraintlayoutintro'
@@ -26,7 +26,7 @@ include ':p0101_listener'
 include ':p0102_activitylistener'
 include ':p0103_simple'
 include ':p0111_resvalues'
-include ':ratingimages'
+include ':pr4_ratingimages'
 include ':guess_the_number'
 include ':listview'
 include ':tabbedactivity'
