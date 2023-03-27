@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">pr6_dialog</string>
+    <string name="text">Выбрать фон</string>
+    <string name="message">Хотите изменить фон?</string>
+    <color name="redColor">#FF0000</color>
+    <color name="yellowColor">#FFFF00</color>
+    <color name="greenColor">#00FF00</color>
+    <color name="whiteColor">#FFFFFF</color>
+    <string name="red">Красный</string>
+    <string name="yellow">Жёлтый</string>
+    <string name="green">Зелёный</string>
+    <string name="white">По умолчанию</string>
+</resources>

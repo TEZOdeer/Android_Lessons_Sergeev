@@ -7,13 +7,12 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="19" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/constraintlayoutintro" />
-            <option value="$PROJECT_DIR$/guess_the_number" />
-            <option value="$PROJECT_DIR$/listview" />
             <option value="$PROJECT_DIR$/p0041basicviews" />
             <option value="$PROJECT_DIR$/p0051layoutfiles" />
             <option value="$PROJECT_DIR$/p0061layouts" />
@@ -26,6 +25,10 @@
             <option value="$PROJECT_DIR$/p0111_resvalues" />
             <option value="$PROJECT_DIR$/p0180constraintlayoutintro" />
             <option value="$PROJECT_DIR$/pr4_ratingimages" />
+            <option value="$PROJECT_DIR$/pr5_guess_the_number" />
+            <option value="$PROJECT_DIR$/pr6_dialog" />
+            <option value="$PROJECT_DIR$/pr8_maps" />
+            <option value="$PROJECT_DIR$/pr_listview" />
             <option value="$PROJECT_DIR$/ta" />
             <option value="$PROJECT_DIR$/tabbedactivity" />
           </set>

@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -71,8 +71,8 @@
 
         <ImageButton
             android:id="@+id/Dislike"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginStart="8dp"
             android:scaleType="fitXY"
             android:src="@drawable/dislike"
@@ -81,8 +81,8 @@
 
         <ImageButton
             android:id="@+id/Like"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginEnd="8dp"
             android:scaleType="fitXY"
             android:src="@drawable/like"

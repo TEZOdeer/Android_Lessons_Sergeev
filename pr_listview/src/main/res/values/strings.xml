@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Флаги стран мира</string>
+    <string name="Japan">Япония</string>
+    <string name="Russia">Россия</string>
+    <string name="Poland">Польша</string>
+    <string name="Switzerland">Швейцария</string>
+    <string name="Uruguay">Уругвай</string>
+    <string name="madeBY">Приложение разработано Сергеевым Владимиром из ИСИП22/1</string>
+    <string name="start">Запустить приложение</string>
+</resources>
