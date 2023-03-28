@@ -69,7 +69,7 @@ public class Custom extends AppCompatActivity {
             Start.putExtra("max", max);
             Start.putExtra("tries", tries);
             startActivity(Start);
-            overridePendingTransition(0, 0);
+            overri (0, 0);
         }
     }
         public void Exit (View v){

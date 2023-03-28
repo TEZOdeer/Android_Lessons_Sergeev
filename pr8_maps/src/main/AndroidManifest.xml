@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Lessons_Sergeev">
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -21,7 +21,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAl0mG0-Cy1Qbpx8SjMKbf9aS0PZD8SnRI" />
+            android:value="AIzaSyAl0mG0-Cy1Qbpx8SjMKbf9aS0PZD8SnRI"/>
 
         <activity
             android:name=".MapsActivity"
