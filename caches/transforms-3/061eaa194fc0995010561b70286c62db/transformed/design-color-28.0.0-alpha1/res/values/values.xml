@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="color" name="colorPrimary100"/>
+    <attr format="color" name="colorPrimary200"/>
+    <attr format="color" name="colorPrimary300"/>
+    <attr format="color" name="colorPrimary400"/>
+    <attr format="color" name="colorPrimary50"/>
+    <attr format="color" name="colorPrimary500"/>
+    <attr format="color" name="colorPrimary600"/>
+    <attr format="color" name="colorPrimary700"/>
+    <attr format="color" name="colorPrimary800"/>
+    <attr format="color" name="colorPrimary900"/>
+    <attr format="color" name="colorPrimaryLight"/>
+    <attr format="color" name="colorSecondary"/>
+    <attr format="color" name="colorSecondary100"/>
+    <attr format="color" name="colorSecondary200"/>
+    <attr format="color" name="colorSecondary300"/>
+    <attr format="color" name="colorSecondary400"/>
+    <attr format="color" name="colorSecondary50"/>
+    <attr format="color" name="colorSecondary500"/>
+    <attr format="color" name="colorSecondary600"/>
+    <attr format="color" name="colorSecondary700"/>
+    <attr format="color" name="colorSecondary800"/>
+    <attr format="color" name="colorSecondary900"/>
+    <attr format="color" name="colorSecondaryDark"/>
+    <attr format="color" name="colorSecondaryLight"/>
+    <attr format="reference" name="floatingActionButtonStyle"/>
+    <attr format="reference" name="materialButtonStyle"/>
+    <attr format="reference" name="materialSwitchStyle"/>
+    <attr format="color" name="rippleColor"/>
+    <attr format="color|reference" name="scrimBackground"/>
+    <color name="design_default_color_primary">#3F51B5</color>
+    <color name="design_default_color_primary_dark">#303F9F</color>
+    <color name="mtrl_scrim_color">#52000000</color>
+</resources>

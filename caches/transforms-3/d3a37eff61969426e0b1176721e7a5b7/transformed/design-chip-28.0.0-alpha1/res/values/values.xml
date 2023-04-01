@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <attr format="reference" name="chipGroupStyle"/>
+    <attr format="reference" name="chipStandaloneStyle"/>
+    <attr format="reference" name="chipStyle"/>
+    <declare-styleable name="ChipDrawable"><attr format="color" name="chipBackgroundColor"/><attr format="dimension" name="chipMinHeight"/><attr format="dimension" name="chipCornerRadius"/><attr format="color" name="chipStrokeColor"/><attr format="dimension" name="chipStrokeWidth"/><attr name="rippleColor"/><attr format="string" localization="suggested" name="chipText"/><attr name="android:textAppearance"/><attr format="boolean" name="chipIconEnabled"/><attr format="reference" name="chipIcon"/><attr format="dimension" name="chipIconSize"/><attr format="boolean" name="closeIconEnabled"/><attr format="reference" name="closeIcon"/><attr format="color" name="closeIconTint"/><attr format="dimension" name="closeIconSize"/><attr name="android:checkable"/><attr format="boolean" name="checkedIconEnabled"/><attr format="reference" name="checkedIcon"/><attr name="showMotionSpec"/><attr name="hideMotionSpec"/><attr format="dimension" name="chipStartPadding"/><attr format="dimension" name="iconStartPadding"/><attr format="dimension" name="iconEndPadding"/><attr format="dimension" name="textStartPadding"/><attr format="dimension" name="textEndPadding"/><attr format="dimension" name="closeIconStartPadding"/><attr format="dimension" name="closeIconEndPadding"/><attr format="dimension" name="chipEndPadding"/></declare-styleable>
+    <declare-styleable name="ChipGroup"><attr format="dimension" name="chipSpacing"/><attr format="dimension" name="chipSpacingHorizontal"/><attr format="dimension" name="chipSpacingVertical"/><attr format="boolean" name="singleLine"/><attr format="boolean" name="singleSelection"/><attr format="reference" name="checkedChip"/></declare-styleable>
+    <dimen name="mtrl_chip_pressed_translation_z">3dp</dimen>
+    <dimen name="mtrl_chip_text_size">14sp</dimen>
+    <integer name="mtrl_chip_anim_duration">100</integer>
+    <string name="mtrl_chip_close_icon_content_description">Close icon</string>
+    <style name="Base.Widget.MaterialComponents.Chip" parent="android:Widget">
+    <item name="android:focusable">true</item>
+    <item name="android:clickable">true</item>
+    <item name="android:checkable">false</item>
+    <item name="android:stateListAnimator" ns1:ignore="NewApi">
+      @animator/mtrl_chip_state_list_anim
+    </item>
+
+    <item name="chipIconEnabled">true</item>
+    <item name="checkedIconEnabled">true</item>
+    <item name="closeIconEnabled">true</item>
+
+    <item name="chipIcon">@null</item>
+    <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_circle</item>
+    <item name="closeIcon">@drawable/ic_mtrl_chip_close_circle</item>
+
+    <item name="chipText">@null</item>
+    <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Chip</item>
+    <item name="closeIconTint">@color/mtrl_chip_close_icon_tint</item>
+
+    <item name="chipBackgroundColor">@color/mtrl_chip_background_color</item>
+    <item name="chipStrokeColor">#00000000</item>
+    <item name="chipStrokeWidth">0dp</item>
+    <item name="rippleColor">@color/mtrl_chip_ripple_color</item>
+
+    <item name="chipMinHeight">32dp</item>
+    <item name="chipCornerRadius">16dp</item>
+    <item name="chipIconSize">24dp</item>
+    <item name="closeIconSize">18dp</item>
+
+    <item name="chipStartPadding">4dp</item>
+    <item name="iconStartPadding">0dp</item>
+    <item name="iconEndPadding">0dp</item>
+    <item name="textStartPadding">8dp</item>
+    <item name="textEndPadding">6dp</item>
+    <item name="closeIconStartPadding">2dp</item>
+    <item name="closeIconEndPadding">2dp</item>
+    <item name="chipEndPadding">6dp</item>
+  </style>
+    <style name="TextAppearance.MaterialComponents.Chip" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">@color/mtrl_chip_text_color</item>
+    <item name="android:textSize">@dimen/mtrl_chip_text_size</item>
+  </style>
+    <style name="Widget.MaterialComponents.Chip.Action" parent="Base.Widget.MaterialComponents.Chip">
+    <item name="closeIconEnabled">false</item>
+  </style>
+    <style name="Widget.MaterialComponents.Chip.Choice" parent="Base.Widget.MaterialComponents.Chip">
+    <item name="android:checkable">true</item>
+
+    <item name="chipIconEnabled">false</item>
+    <item name="checkedIconEnabled">false</item>
+    <item name="closeIconEnabled">false</item>
+
+    <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_black</item>
+  </style>
+    <style name="Widget.MaterialComponents.Chip.Entry" parent="Base.Widget.MaterialComponents.Chip">
+    <item name="android:checkable">true</item>
+  </style>
+    <style name="Widget.MaterialComponents.Chip.Filter" parent="Base.Widget.MaterialComponents.Chip">
+    <item name="android:checkable">true</item>
+
+    <item name="chipIconEnabled">false</item>
+    <item name="closeIconEnabled">false</item>
+
+    <item name="checkedIcon">@drawable/ic_mtrl_chip_checked_black</item>
+  </style>
+    <style name="Widget.MaterialComponents.ChipGroup" parent="android:Widget">
+    <item name="chipSpacing">4dp</item>
+    <item name="singleLine">false</item>
+    <item name="singleSelection">false</item>
+  </style>
+</resources>

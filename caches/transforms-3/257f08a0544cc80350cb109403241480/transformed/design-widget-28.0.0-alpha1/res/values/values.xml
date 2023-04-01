@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="design_snackbar_background_color">#323232</color>
+    <color name="mtrl_btn_bg_color_disabled">#1F000000</color>
+    <color name="mtrl_btn_text_color_disabled">#61000000</color>
+    <color name="mtrl_btn_transparent_bg_color">#00ffffff</color>
+    <declare-styleable name="AppBarLayout"><attr name="elevation"/><attr name="android:background"/><attr format="boolean" name="expanded"/><attr name="android:keyboardNavigationCluster"/><attr name="android:touchscreenBlocksFocus"/></declare-styleable>
+    <declare-styleable name="AppBarLayoutStates"><attr format="boolean" name="state_collapsed"/><attr format="boolean" name="state_collapsible"/></declare-styleable>
+    <declare-styleable name="AppBarLayout_Layout"><attr name="layout_scrollFlags">
+      
+      <flag name="scroll" value="0x1"/>
+
+      
+      <flag name="exitUntilCollapsed" value="0x2"/>
+
+      
+      <flag name="enterAlways" value="0x4"/>
+
+      
+      <flag name="enterAlwaysCollapsed" value="0x8"/>
+
+      
+      <flag name="snap" value="0x10"/>
+    </attr><attr format="reference" name="layout_scrollInterpolator"/></declare-styleable>
+    <declare-styleable name="CollapsingToolbarLayout"><attr format="dimension" name="expandedTitleMargin"/><attr format="dimension" name="expandedTitleMarginStart"/><attr format="dimension" name="expandedTitleMarginTop"/><attr format="dimension" name="expandedTitleMarginEnd"/><attr format="dimension" name="expandedTitleMarginBottom"/><attr format="reference" name="expandedTitleTextAppearance"/><attr format="reference" name="collapsedTitleTextAppearance"/><attr format="color" name="contentScrim"/><attr format="color" name="statusBarScrim"/><attr format="reference" name="toolbarId"/><attr format="dimension" name="scrimVisibleHeightTrigger"/><attr format="integer" name="scrimAnimationDuration"/><attr name="collapsedTitleGravity">
+      
+      <flag name="top" value="0x30"/>
+      
+      <flag name="bottom" value="0x50"/>
+      
+      <flag name="left" value="0x03"/>
+      
+      <flag name="right" value="0x05"/>
+      
+      <flag name="center_vertical" value="0x10"/>
+      
+      <flag name="fill_vertical" value="0x70"/>
+      
+      <flag name="center_horizontal" value="0x01"/>
+      
+      <flag name="center" value="0x11"/>
+      
+      <flag name="start" value="0x00800003"/>
+      
+      <flag name="end" value="0x00800005"/>
+    </attr><attr name="expandedTitleGravity">
+      
+      <flag name="top" value="0x30"/>
+      
+      <flag name="bottom" value="0x50"/>
+      
+      <flag name="left" value="0x03"/>
+      
+      <flag name="right" value="0x05"/>
+      
+      <flag name="center_vertical" value="0x10"/>
+      
+      <flag name="fill_vertical" value="0x70"/>
+      
+      <flag name="center_horizontal" value="0x01"/>
+      
+      <flag name="center" value="0x11"/>
+      
+      <flag name="start" value="0x00800003"/>
+      
+      <flag name="end" value="0x00800005"/>
+    </attr><attr format="boolean" name="titleEnabled"/><attr name="title"/></declare-styleable>
+    <declare-styleable name="CollapsingToolbarLayout_Layout"><attr name="layout_collapseMode">
+      
+      <enum name="none" value="0"/>
+      
+      <enum name="pin" value="1"/>
+      
+      <enum name="parallax" value="2"/>
+    </attr><attr format="float" name="layout_collapseParallaxMultiplier"/></declare-styleable>
+    <declare-styleable name="ScrollingViewBehavior_Layout"><attr format="dimension" name="behavior_overlapTop"/></declare-styleable>
+    <dimen name="design_appbar_elevation">4dp</dimen>
+    <dimen name="design_navigation_elevation">16dp</dimen>
+    <dimen name="design_navigation_max_width">280dp</dimen>
+    <dimen name="design_snackbar_action_inline_max_width">128dp</dimen>
+    <dimen name="design_snackbar_background_corner_radius">0dp</dimen>
+    <dimen name="design_snackbar_elevation">6dp</dimen>
+    <dimen name="design_snackbar_extra_spacing_horizontal">0dp</dimen>
+    <dimen name="design_snackbar_max_width">-1px</dimen>
+    <dimen name="design_snackbar_min_width">-1px</dimen>
+    <dimen name="design_snackbar_padding_horizontal">12dp</dimen>
+    <dimen name="design_snackbar_text_size">14sp</dimen>
+    <item name="view_offset_helper" type="id"/>
+    <integer name="app_bar_elevation_anim_duration">150</integer>
+    <integer name="design_snackbar_text_max_lines">2</integer>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
+    <style name="TextAppearance.Design.CollapsingToolbar.Expanded" parent="TextAppearance.AppCompat.Display1">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+  </style>
+    <style name="TextAppearance.Design.Snackbar.Message" parent="android:TextAppearance">
+    <item name="android:textSize">@dimen/design_snackbar_text_size</item>
+    <item name="android:textColor">?android:textColorPrimary</item>
+  </style>
+    <style name="Widget.Design.AppBarLayout" parent="android:Widget">
+    <item name="android:background">?attr/colorPrimary</item>
+    <item name="android:stateListAnimator" ns1:ignore="NewApi">
+      @animator/design_appbar_state_list_animator
+    </item>
+    <item name="android:keyboardNavigationCluster" ns1:ignore="NewApi">true</item>
+    <item name="android:touchscreenBlocksFocus" ns1:ignore="NewApi">true</item>
+  </style>
+    <style name="Widget.Design.CollapsingToolbar" parent="android:Widget">
+    <item name="expandedTitleMargin">32dp</item>
+    <item name="statusBarScrim">?attr/colorPrimaryDark</item>
+  </style>
+    <style name="Widget.Design.Snackbar" parent="android:Widget">
+    <item name="android:minWidth">@dimen/design_snackbar_min_width</item>
+    <item name="android:maxWidth">@dimen/design_snackbar_max_width</item>
+    <item name="android:background">@drawable/design_snackbar_background</item>
+    <item name="android:paddingLeft">@dimen/design_snackbar_padding_horizontal</item>
+    <item name="android:paddingRight">@dimen/design_snackbar_padding_horizontal</item>
+    <item name="elevation">@dimen/design_snackbar_elevation</item>
+    <item name="maxActionInlineWidth">@dimen/design_snackbar_action_inline_max_width</item>
+  </style>
+</resources>

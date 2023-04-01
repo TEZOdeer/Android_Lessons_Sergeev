@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="hideMotionSpec"/>
+    <attr format="reference" name="showMotionSpec"/>
+    <item name="mtrl_child_content_container" type="id"/>
+    <item name="mtrl_internal_children_alpha_tag" type="id"/>
+</resources>

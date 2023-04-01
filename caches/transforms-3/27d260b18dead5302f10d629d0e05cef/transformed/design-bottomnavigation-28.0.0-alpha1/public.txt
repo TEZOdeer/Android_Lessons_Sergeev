@@ -1,0 +1,8 @@
+attr bottomNavigationStyle
+attr itemBackground
+attr itemIconTint
+attr itemTextAppearanceActive
+attr itemTextAppearanceInactive
+attr itemTextColor
+attr labelVisibilityMode
+attr menu

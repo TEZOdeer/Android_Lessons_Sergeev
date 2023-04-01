@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="navigationViewStyle"/>
+    <declare-styleable name="NavigationView"><attr name="android:background"/><attr name="android:fitsSystemWindows"/><attr name="android:maxWidth"/><attr name="elevation"/><attr format="reference" name="menu"/><attr format="color" name="itemIconTint"/><attr format="color" name="itemTextColor"/><attr format="reference" name="itemBackground"/><attr format="reference" name="itemTextAppearance"/><attr format="reference" name="headerLayout"/><attr format="dimension" name="itemHorizontalPadding"/><attr format="dimension" name="itemIconPadding"/></declare-styleable>
+    <dimen name="design_navigation_elevation">16dp</dimen>
+    <dimen name="design_navigation_item_horizontal_padding">16dp</dimen>
+    <dimen name="design_navigation_item_icon_padding">32dp</dimen>
+    <dimen name="design_navigation_max_width">280dp</dimen>
+    <dimen name="mtrl_navigation_elevation">0dp</dimen>
+    <dimen name="mtrl_navigation_item_horizontal_padding">22dp</dimen>
+    <dimen name="mtrl_navigation_item_icon_padding">14dp</dimen>
+    <style name="Widget.Design.NavigationView" parent="">
+    <item name="elevation">@dimen/design_navigation_elevation</item>
+    <item name="itemIconPadding">@dimen/design_navigation_item_icon_padding</item>
+    <item name="itemHorizontalPadding">@dimen/design_navigation_item_horizontal_padding</item>
+    <item name="android:background">?android:attr/windowBackground</item>
+    <item name="android:fitsSystemWindows">true</item>
+    <item name="android:maxWidth">@dimen/design_navigation_max_width</item>
+  </style>
+    <style name="Widget.MaterialComponents.NavigationView" parent="Widget.Design.NavigationView">
+    <item name="elevation">@dimen/mtrl_navigation_elevation</item>
+    <item name="itemIconPadding">@dimen/mtrl_navigation_item_icon_padding</item>
+    <item name="itemHorizontalPadding">@dimen/mtrl_navigation_item_horizontal_padding</item>
+    <item name="android:maxWidth">0dp</item>
+  </style>
+</resources>

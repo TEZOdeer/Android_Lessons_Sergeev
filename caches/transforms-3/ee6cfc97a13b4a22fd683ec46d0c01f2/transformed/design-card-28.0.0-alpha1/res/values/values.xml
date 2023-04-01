@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="materialCardViewStyle"/>
+    <color name="mtrl_card_bg_color">#ffffff</color>
+    <declare-styleable name="MaterialCardView"><attr format="color" name="strokeColor"/><attr format="dimension" name="strokeWidth"/></declare-styleable>
+    <dimen name="mtrl_card_elevation">1dp</dimen>
+    <dimen name="mtrl_card_spacing">8dp</dimen>
+    <style name="Widget.MaterialComponents.CardView" parent="CardView">
+    <item name="cardElevation">@dimen/mtrl_card_elevation</item>
+    <item name="cardBackgroundColor">@color/mtrl_card_bg_color</item>
+  </style>
+</resources>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DesignTheme"><attr format="reference" name="bottomSheetDialogTheme"/><attr format="reference" name="bottomSheetStyle"/></declare-styleable>
+    <declare-styleable name="MaterialComponentsTheme"><attr name="colorAccent"/><attr name="colorPrimary"/><attr name="colorPrimaryLight"/><attr name="colorPrimaryDark"/><attr name="colorSecondary"/><attr name="colorSecondaryLight"/><attr name="colorSecondaryDark"/><attr name="colorPrimary50"/><attr name="colorPrimary100"/><attr name="colorPrimary200"/><attr name="colorPrimary300"/><attr name="colorPrimary400"/><attr name="colorPrimary500"/><attr name="colorPrimary600"/><attr name="colorPrimary700"/><attr name="colorPrimary800"/><attr name="colorPrimary900"/><attr name="colorSecondary50"/><attr name="colorSecondary100"/><attr name="colorSecondary200"/><attr name="colorSecondary300"/><attr name="colorSecondary400"/><attr name="colorSecondary500"/><attr name="colorSecondary600"/><attr name="colorSecondary700"/><attr name="colorSecondary800"/><attr name="colorSecondary900"/><attr name="scrimBackground"/><attr name="bottomSheetDialogTheme"/><attr name="bottomSheetStyle"/><attr name="materialButtonStyle"/><attr name="materialSwitchStyle"/><attr name="floatingActionButtonStyle"/><attr name="chipGroupStyle"/><attr name="chipStyle"/><attr name="chipStandaloneStyle"/><attr name="materialCardViewStyle"/><attr name="navigationViewStyle"/><attr name="tabStyle"/><attr name="textInputStyle"/><attr name="textAppearanceHeadline1"/><attr name="textAppearanceHeadline2"/><attr name="textAppearanceHeadline3"/><attr name="textAppearanceHeadline4"/><attr name="textAppearanceHeadline5"/><attr name="textAppearanceHeadline6"/><attr name="textAppearanceSubtitle1"/><attr name="textAppearanceSubtitle2"/><attr name="textAppearanceBody1"/><attr name="textAppearanceBody2"/><attr name="textAppearanceCaption"/><attr name="textAppearanceButton"/><attr name="textAppearanceOverline"/></declare-styleable>
+    <style name="Base.Theme.MaterialComponents" parent="Base.V14.Theme.MaterialComponents"/>
+    <style name="Base.Theme.MaterialComponents.CompactMenu" parent="">
+    <item name="android:itemTextAppearance">?android:attr/textAppearanceMedium</item>
+    <item name="android:listViewStyle">@style/Widget.AppCompat.ListView.Menu</item>
+    <item name="android:windowAnimationStyle">@style/Animation.AppCompat.DropDownUp</item>
+  </style>
+    <style name="Base.Theme.MaterialComponents.DialogWhenLarge" parent="Theme.MaterialComponents"/>
+    <style name="Base.Theme.MaterialComponents.Light" parent="Base.V14.Theme.MaterialComponents.Light"/>
+    <style name="Base.Theme.MaterialComponents.Light.DarkActionBar" parent="Base.Theme.MaterialComponents.Light">
+    <item name="actionBarPopupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
+    <item name="actionBarWidgetTheme">@null</item>
+    <item name="actionBarTheme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+
+    <!-- Panel attributes -->
+    <item name="listChoiceBackgroundIndicator">@drawable/abc_list_selector_holo_dark</item>
+
+    <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
+    <item name="colorPrimary">@color/primary_material_dark</item>
+  </style>
+    <style name="Base.Theme.MaterialComponents.Light.DialogWhenLarge" parent="Theme.MaterialComponents.Light"/>
+    <style name="Base.V14.Theme.MaterialComponents" parent="Platform.MaterialComponents">
+    <item name="viewInflaterClass">android.support.design.theme.MaterialComponentsViewInflater
+    </item>
+
+    <!-- Colors -->
+    <item name="colorPrimary">@color/design_default_color_primary</item>
+    <item name="colorPrimaryLight">?attr/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+
+    <item name="colorSecondary">?attr/colorPrimary</item>
+    <item name="colorSecondaryLight">?attr/colorPrimaryLight</item>
+    <item name="colorSecondaryDark">?attr/colorPrimaryDark</item>
+
+    <item name="colorAccent">?attr/colorSecondary</item>
+
+    <item name="colorPrimary50">?attr/colorPrimary100</item>
+    <item name="colorPrimary100">?attr/colorPrimary200</item>
+    <item name="colorPrimary200">?attr/colorPrimary300</item>
+    <item name="colorPrimary300">?attr/colorPrimary400</item>
+    <item name="colorPrimary400">?attr/colorPrimary500</item>
+    <item name="colorPrimary500">?attr/colorPrimaryLight</item>
+    <item name="colorPrimary600">?attr/colorPrimary</item>
+    <item name="colorPrimary700">?attr/colorPrimary600</item>
+    <item name="colorPrimary800">?attr/colorPrimary700</item>
+    <item name="colorPrimary900">?attr/colorPrimaryDark</item>
+
+    <item name="colorSecondary50">?attr/colorSecondary100</item>
+    <item name="colorSecondary100">?attr/colorSecondary200</item>
+    <item name="colorSecondary200">?attr/colorSecondary300</item>
+    <item name="colorSecondary300">?attr/colorSecondary400</item>
+    <item name="colorSecondary400">?attr/colorSecondary500</item>
+    <item name="colorSecondary500">?attr/colorSecondaryLight</item>
+    <item name="colorSecondary600">?attr/colorSecondary</item>
+    <item name="colorSecondary700">?attr/colorSecondary600</item>
+    <item name="colorSecondary800">?attr/colorSecondary700</item>
+    <item name="colorSecondary900">?attr/colorSecondaryDark</item>
+
+    <item name="scrimBackground">@color/mtrl_scrim_color</item>
+
+    <!-- Widget styles -->
+    <item name="bottomNavigationStyle">
+      @style/Widget.MaterialComponents.BottomNavigationView.Colored
+    </item>
+    <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+    <item name="chipGroupStyle">@style/Widget.MaterialComponents.ChipGroup</item>
+    <item name="chipStandaloneStyle">@style/Widget.MaterialComponents.Chip.Entry</item>
+    <item name="floatingActionButtonStyle">
+      @style/Widget.MaterialComponents.FloatingActionButton
+    </item>
+    <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+    <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
+    <item name="tabStyle">@style/Widget.MaterialComponents.TabLayout.Colored</item>
+    <item name="navigationViewStyle">@style/Widget.MaterialComponents.NavigationView</item>
+    <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
+
+    <!-- Type styles -->
+    <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+    <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+    <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+    <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+    <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+    <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+    <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+    <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+    <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+    <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+    <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+    <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+    <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+  </style>
+    <style name="Base.V14.Theme.MaterialComponents.Light" parent="Platform.MaterialComponents.Light">
+    <item name="viewInflaterClass">android.support.design.theme.MaterialComponentsViewInflater
+    </item>
+
+    <!-- Colors -->
+    <item name="colorPrimary">@color/design_default_color_primary</item>
+    <item name="colorPrimaryLight">?attr/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+
+    <item name="colorSecondary">?attr/colorPrimary</item>
+    <item name="colorSecondaryLight">?attr/colorPrimaryLight</item>
+    <item name="colorSecondaryDark">?attr/colorPrimaryDark</item>
+
+    <item name="colorAccent">?attr/colorSecondary</item>
+
+    <item name="colorPrimary50">?attr/colorPrimary100</item>
+    <item name="colorPrimary100">?attr/colorPrimary200</item>
+    <item name="colorPrimary200">?attr/colorPrimary300</item>
+    <item name="colorPrimary300">?attr/colorPrimary400</item>
+    <item name="colorPrimary400">?attr/colorPrimary500</item>
+    <item name="colorPrimary500">?attr/colorPrimaryLight</item>
+    <item name="colorPrimary600">?attr/colorPrimary</item>
+    <item name="colorPrimary700">?attr/colorPrimary600</item>
+    <item name="colorPrimary800">?attr/colorPrimary700</item>
+    <item name="colorPrimary900">?attr/colorPrimaryDark</item>
+
+    <item name="colorSecondary50">?attr/colorSecondary100</item>
+    <item name="colorSecondary100">?attr/colorSecondary200</item>
+    <item name="colorSecondary200">?attr/colorSecondary300</item>
+    <item name="colorSecondary300">?attr/colorSecondary400</item>
+    <item name="colorSecondary400">?attr/colorSecondary500</item>
+    <item name="colorSecondary500">?attr/colorSecondaryLight</item>
+    <item name="colorSecondary600">?attr/colorSecondary</item>
+    <item name="colorSecondary700">?attr/colorSecondary600</item>
+    <item name="colorSecondary800">?attr/colorSecondary700</item>
+    <item name="colorSecondary900">?attr/colorSecondaryDark</item>
+
+    <item name="scrimBackground">@color/mtrl_scrim_color</item>
+
+    <!-- Widget styles -->
+    <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView</item>
+    <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+    <item name="chipGroupStyle">@style/Widget.MaterialComponents.ChipGroup</item>
+    <item name="chipStandaloneStyle">@style/Widget.MaterialComponents.Chip.Entry</item>
+    <item name="floatingActionButtonStyle">
+      @style/Widget.MaterialComponents.FloatingActionButton
+    </item>
+    <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+    <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
+    <item name="navigationViewStyle">@style/Widget.MaterialComponents.NavigationView</item>
+    <item name="tabStyle">@style/Widget.MaterialComponents.TabLayout</item>
+    <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
+
+    <!-- Type styles -->
+    <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+    <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+    <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+    <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+    <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+    <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+    <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+    <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+    <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+    <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+    <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+    <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+    <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+  </style>
+    <style name="Platform.MaterialComponents" parent="Theme.AppCompat"/>
+    <style name="Platform.MaterialComponents.Dialog" parent="Theme.AppCompat.Dialog"/>
+    <style name="Platform.MaterialComponents.Light" parent="Theme.AppCompat.Light"/>
+    <style name="Platform.MaterialComponents.Light.Dialog" parent="Theme.AppCompat.Light.Dialog"/>
+    <style name="Theme.Design" parent="Theme.AppCompat">
+  </style>
+    <style name="Theme.Design.Light" parent="Theme.AppCompat.Light">
+  </style>
+    <style name="Theme.Design.Light.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+    <style name="Theme.Design.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+    <style name="Theme.MaterialComponents" parent="Base.Theme.MaterialComponents"/>
+    <style name="Theme.MaterialComponents.CompactMenu" parent="Base.Theme.MaterialComponents.CompactMenu"/>
+    <style name="Theme.MaterialComponents.Dialog" parent="Base.Theme.MaterialComponents.Dialog"/>
+    <style name="Theme.MaterialComponents.Dialog.Alert" parent="Base.Theme.MaterialComponents.Dialog.Alert"/>
+    <style name="Theme.MaterialComponents.Dialog.MinWidth" parent="Base.Theme.MaterialComponents.Dialog.MinWidth"/>
+    <style name="Theme.MaterialComponents.DialogWhenLarge" parent="Base.Theme.MaterialComponents.DialogWhenLarge">
+  </style>
+    <style name="Theme.MaterialComponents.Light" parent="Base.Theme.MaterialComponents.Light"/>
+    <style name="Theme.MaterialComponents.Light.DarkActionBar" parent="Base.Theme.MaterialComponents.Light.DarkActionBar"/>
+    <style name="Theme.MaterialComponents.Light.Dialog" parent="Base.Theme.MaterialComponents.Light.Dialog"/>
+    <style name="Theme.MaterialComponents.Light.Dialog.Alert" parent="Base.Theme.MaterialComponents.Light.Dialog.Alert"/>
+    <style name="Theme.MaterialComponents.Light.Dialog.MinWidth" parent="Base.Theme.MaterialComponents.Light.Dialog.MinWidth"/>
+    <style name="Theme.MaterialComponents.Light.DialogWhenLarge" parent="Base.Theme.MaterialComponents.Light.DialogWhenLarge">
+  </style>
+    <style name="Theme.MaterialComponents.Light.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+    <style name="Theme.MaterialComponents.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+    <style name="ThemeOverlay.MaterialComponents" parent="ThemeOverlay.AppCompat"/>
+    <style name="ThemeOverlay.MaterialComponents.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar"/>
+    <style name="ThemeOverlay.MaterialComponents.Dark" parent="ThemeOverlay.AppCompat.Dark"/>
+    <style name="ThemeOverlay.MaterialComponents.Dark.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="ThemeOverlay.MaterialComponents.Dialog" parent="ThemeOverlay.AppCompat.Dialog"/>
+    <style name="ThemeOverlay.MaterialComponents.Dialog.Alert" parent="ThemeOverlay.AppCompat.Dialog.Alert"/>
+    <style name="ThemeOverlay.MaterialComponents.Light" parent="ThemeOverlay.AppCompat.Light"/>
+</resources>
