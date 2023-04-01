@@ -1,0 +1,2 @@
+JAVA_VERSION="19"
+MODULES="java.base"

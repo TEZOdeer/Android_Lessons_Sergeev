@@ -9,5 +9,14 @@
     <string name="sign_in">Вход</string>
     <string name="sign_out">Выход</string>
     <string name="account">Аккаунт</string>
-
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="sign_up_button">Зарегистрироваться</string>
+    <string name="sign_in_button">Войти</string>
+    <string name="sign_in_or_sign_up">Войдите или зарегистрируйтесь</string>
+    <!-- EditActivity -->
+    <string name="ed_ac_title">Название</string>
+    <string name="ed_ac_price">Цена</string>
+    <string name="ed_ac_description">Описание</string>
+    <string name="ed_ac_tel">Телефон</string>
 </resources>

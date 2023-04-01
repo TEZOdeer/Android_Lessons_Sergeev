@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "912790486055",
+    "firebase_url": "https://sergeev-abito-app-default-rtdb.firebaseio.com",
+    "project_id": "sergeev-abito-app",
+    "storage_bucket": "sergeev-abito-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912790486055:android:d5aecae69cd19cad10e202",
+        "android_client_info": {
+          "package_name": "ru.sergeev.tezodeer.abito"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912790486055-qmpb919jbm7cskeogpvkl598gseglsk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgVrWdYmg8XRbPixfaZ7Axg6nz1qKyz2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912790486055-qmpb919jbm7cskeogpvkl598gseglsk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

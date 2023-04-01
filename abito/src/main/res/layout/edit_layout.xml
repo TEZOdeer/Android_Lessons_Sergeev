@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/imItem"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="onClickImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <EditText
+        android:id="@+id/edTitile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/ed_ac_title"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/imItem"
+        app:layout_constraintStart_toStartOf="@+id/imItem"
+        app:layout_constraintTop_toBottomOf="@id/imItem" />
+
+    <EditText
+        android:id="@+id/edPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/ed_ac_price"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edTitile"
+        app:layout_constraintStart_toStartOf="@+id/edTitile"
+        app:layout_constraintTop_toBottomOf="@+id/edTitile" />
+
+    <EditText
+        android:id="@+id/edTel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/ed_ac_tel"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/edPrice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edPrice"
+        app:layout_constraintTop_toBottomOf="@+id/edPrice" />
+
+    <EditText
+        android:id="@+id/edDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/ed_ac_description"
+        android:inputType="textMultiLine|textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edTel"
+        app:layout_constraintStart_toStartOf="@+id/edTel"
+        app:layout_constraintTop_toBottomOf="@+id/edTel" />
+</androidx.constraintlayout.widget.ConstraintLayout>
