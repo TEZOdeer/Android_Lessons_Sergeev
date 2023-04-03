@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -21,6 +23,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth;
     private TextView userEmail;
     private AlertDialog dialog;
+    private Toolbar toolbar;
+    private FloatingActionButton fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +48,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void init()
     {
+        fb = findViewById(R.id.floatingActionButton2);
         nav_view = findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        toolbar = findViewById(R.id.toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.toggle_open, R.string.toggle_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
         nav_view.setNavigationItemSelectedListener(this);
         userEmail = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tvEmail);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("abito");
-        myRef.setValue("Hello, World!");
-        drawerLayout.openDrawer(GravityCompat.START);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+    }
+    public void onClickEdit(View v)
+    {
+        Intent i = new Intent(MainActivity.this, EditActivity.class);
+        startActivity(i);
     }
     private void getUserData()
     {

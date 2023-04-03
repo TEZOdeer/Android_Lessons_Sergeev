@@ -6,7 +6,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,9 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -27,6 +33,10 @@ public class EditActivity extends AppCompatActivity {
     private ImageView imItem;
     private StorageReference mStorageRef;
     private Uri uploadUri;
+    private Spinner spinner;
+    private DatabaseReference dReference;
+    private FirebaseAuth firebaseAuth;
+    private EditText edTitle, edPrice, edTel, edDisc;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,15 @@ public class EditActivity extends AppCompatActivity {
     }
     private void init()
     {
+        edTitle = findViewById(R.id.edTitile);
+        edPrice = findViewById(R.id.edPrice);
+        edTel = findViewById(R.id.edTel);
+        edDisc = findViewById(R.id.edDescription);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_spinner, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         imItem = (ImageView) findViewById(R.id.imItem);
     }
@@ -54,7 +73,7 @@ public class EditActivity extends AppCompatActivity {
     {
         Bitmap bitmap = ((BitmapDrawable)imItem.getDrawable()).getBitmap();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100,out);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 75,out);
         byte[] byteArray = out.toByteArray();
         final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
         UploadTask up = mRef.putBytes(byteArray);
@@ -67,6 +86,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
             uploadUri = task.getResult();
+            assert uploadUri != null;
                 Toast.makeText(EditActivity.this, "Upload done: " + uploadUri.toString(), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -76,7 +96,9 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void onClickSavePost(View v) {
+        savePost();
+    }
     public void onClickImage (View v) {
         getImage();
     }
@@ -86,5 +108,24 @@ public class EditActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 10);
+    }
+    private void savePost()
+    {
+        dReference = FirebaseDatabase.getInstance().getReference(spinner.getSelectedItem().toString());
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getUid() != null)
+        {
+            String key = dReference.push().getKey();
+            NewPost post = new NewPost();
+            post.setImageId(uploadUri.toString());
+            post.setTitle(edTitle.getText().toString());
+            post.setTel(edTel.getText().toString());
+            post.setPrice(edPrice.getText().toString());
+            post.setDisk(edDisc.getText().toString());
+            post.setKey(key);
+
+            dReference.child(firebaseAuth.getUid()).child(key).setValue(post);
+
+        }
     }
 }
