@@ -4,9 +4,36 @@ public class NewPost {
     private String imageId;
     private String title;
     private String price;
+
+
+    public String getTel() {
+        return tel;
+    }
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
     private String tel;
     private String disk;
     private String key;
+    private String uid;
+    private String time;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getImageId() {
         return imageId;
@@ -30,14 +57,6 @@ public class NewPost {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public String getDisk() {

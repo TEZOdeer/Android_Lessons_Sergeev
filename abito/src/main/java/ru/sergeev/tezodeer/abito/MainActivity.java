@@ -20,6 +20,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +33,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ru.sergeev.tezodeer.abito.adapter.PostAdapter;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView nav_view;
     private DrawerLayout drawerLayout;
@@ -39,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AlertDialog dialog;
     private Toolbar toolbar;
     private FloatingActionButton fb;
+    private PostAdapter.OnItemClickCustom onItemClickCustom;
+    private RecyclerView rcView;
+    private PostAdapter postAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +58,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void init()
     {
+        rcView = findViewById(R.id.recyclerView);
+        rcView.setLayoutManager(new LinearLayoutManager(this));
         fb = findViewById(R.id.floatingActionButton2);
+        List<NewPost> arrayTestPost = new ArrayList<>();
+        NewPost newPost = new NewPost();
+        newPost.setTitle("Mercedes");
+        newPost.setTel("1323");
+        newPost.setDisk("Б/У");
+        newPost.setPrice("10000");
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        arrayTestPost.add(newPost);
+        postAdapter = new PostAdapter(arrayTestPost, this,onItemClickCustom);
+        rcView.setAdapter(postAdapter);
         nav_view = findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolbar);
@@ -58,8 +87,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_view.setNavigationItemSelectedListener(this);
         userEmail = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tvEmail);
         mAuth = FirebaseAuth.getInstance();
+        setOnItemClickCustom();
+
     }
 
+    private void setOnItemClickCustom()
+    {
+        onItemClickCustom = new PostAdapter.OnItemClickCustom() {
+            @Override
+            public void onItemSelected(int position) {
+            }
+        };
+    }
 
     @Override
     protected void onStart() {

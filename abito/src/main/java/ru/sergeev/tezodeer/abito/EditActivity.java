@@ -98,6 +98,8 @@ public class EditActivity extends AppCompatActivity {
     }
     public void onClickSavePost(View v) {
         savePost();
+        Toast.makeText(this, "Объявление опубликовано", Toast.LENGTH_SHORT).show();
+        finish();
     }
     public void onClickImage (View v) {
         getImage();
@@ -123,8 +125,10 @@ public class EditActivity extends AppCompatActivity {
             post.setPrice(edPrice.getText().toString());
             post.setDisk(edDisc.getText().toString());
             post.setKey(key);
+            post.setTime(String.valueOf(System.nanoTime()));
+            post.setUid(firebaseAuth.getUid());
 
-            dReference.child(firebaseAuth.getUid()).child(key).setValue(post);
+            if(key != null)dReference.child(key).child("anuncio").setValue(post);
 
         }
     }
