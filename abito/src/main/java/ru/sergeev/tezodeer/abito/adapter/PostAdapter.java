@@ -1,14 +1,19 @@
 package ru.sergeev.tezodeer.abito.adapter;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.Query;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -61,12 +66,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
             itemView.setOnClickListener(this);
             this.onItemClickCustom = onItemClickCustom;
         }
-        public void SetData(NewPost newPost)
+        public void SetData(@NonNull NewPost newPost)
         {
+            Picasso.get().load(newPost.getImageId()).into(imAds);
             tvTitle.setText(newPost.getTitle());
             String price_tel = "Цена: " + newPost.getPrice() + " Тел: " + newPost.getTel();
             tvPriceTel.setText(price_tel);
-            tvDisc.setText(newPost.getTitle());
+            tvDisc.setText(newPost.getDisk());
         }
 
         @Override
@@ -77,5 +83,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
     public interface OnItemClickCustom
     {
         public void onItemSelected(int position);
+    }
+    public void updateAdapter(List<NewPost> listData)
+    {
+        arrayPost.clear();
+        arrayPost.addAll(listData);
+        notifyDataSetChanged();
     }
 }

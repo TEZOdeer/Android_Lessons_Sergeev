@@ -34,8 +34,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+import ru.sergeev.tezodeer.abito.adapter.DataSender;
 import ru.sergeev.tezodeer.abito.adapter.PostAdapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PostAdapter.OnItemClickCustom onItemClickCustom;
     private RecyclerView rcView;
     private PostAdapter postAdapter;
+    private DataSender dataSender;
+    private DbManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,25 +63,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void init()
     {
+        setOnItemClickCustom();
         rcView = findViewById(R.id.recyclerView);
         rcView.setLayoutManager(new LinearLayoutManager(this));
         fb = findViewById(R.id.floatingActionButton2);
-        List<NewPost> arrayTestPost = new ArrayList<>();
-        NewPost newPost = new NewPost();
-        newPost.setTitle("Mercedes");
-        newPost.setTel("1323");
-        newPost.setDisk("Б/У");
-        newPost.setPrice("10000");
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        arrayTestPost.add(newPost);
-        postAdapter = new PostAdapter(arrayTestPost, this,onItemClickCustom);
+        List<NewPost> arrayPost = new ArrayList<>();
+
+        postAdapter = new PostAdapter(arrayPost, this,onItemClickCustom);
         rcView.setAdapter(postAdapter);
         nav_view = findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -87,8 +80,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_view.setNavigationItemSelectedListener(this);
         userEmail = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tvEmail);
         mAuth = FirebaseAuth.getInstance();
-        setOnItemClickCustom();
 
+
+        getDataDB();
+        dbManager = new DbManager(dataSender);
+
+
+    }
+
+    private void getDataDB()
+    {
+        dataSender = new DataSender() {
+            @Override
+            public void onDataRecived(List<NewPost> listdata) {
+                Collections.reverse(listdata);
+                postAdapter.updateAdapter(listdata);
+
+            }
+        };
     }
 
     private void setOnItemClickCustom()
@@ -127,31 +136,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.id_my_ads:
-                Toast.makeText(this, "Pressed id My Ads", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.id_cars_ads:
-                Toast.makeText(this, "Pressed id Cars Ads", Toast.LENGTH_SHORT).show();
+                dbManager.getDataFromDb("Машины");
                 break;
             case R.id.id_pc_ads:
-                Toast.makeText(this, "Pressed id PC Ads", Toast.LENGTH_SHORT).show();
+                dbManager.getDataFromDb("Компьютеры");
                 break;
             case R.id.id_smartphone_ads:
-                Toast.makeText(this, "Pressed id Smartphone Ads", Toast.LENGTH_SHORT).show();
+                dbManager.getDataFromDb("Смартфоны");
                 break;
             case R.id.id_dm_ads:
-                Toast.makeText(this, "Pressed id My Dm", Toast.LENGTH_SHORT).show();
+                dbManager.getDataFromDb("Бытовая техника");
                 break;
             case R.id.id_sign_up:
                 signUpDialog(R.string.sign_up,R.string.sign_up_button, 0);
-                Toast.makeText(this, "Pressed id Sign Up", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.id_sign_in:
                 signUpDialog(R.string.sign_in,R.string.sign_in_button, 1);
-                Toast.makeText(this, "Pressed id Sign In", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.id_sign_out:
                 signOut();
-                Toast.makeText(this, "Pressed id Sign Out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.startz:
                 Intent a = new Intent(this, EditActivity.class);
@@ -239,4 +244,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth.signOut();
         getUserData();
     }
+
 }
