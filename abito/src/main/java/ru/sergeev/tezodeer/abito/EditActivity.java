@@ -73,7 +73,7 @@ public class EditActivity extends AppCompatActivity {
     {
         Bitmap bitmap = ((BitmapDrawable)imItem.getDrawable()).getBitmap();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 75,out);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 25,out);
         byte[] byteArray = out.toByteArray();
         final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
         UploadTask up = mRef.putBytes(byteArray);
