@@ -18,10 +18,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvPriceTel"
         app:layout_constraintStart_toStartOf="@+id/tvPriceTel"
-        app:layout_constraintTop_toTopOf="@+id/imAds" />
+        app:layout_constraintTop_toTopOf="@+id/ImageView" />
 
     <ImageView
-        android:id="@+id/imAds"
+        android:id="@+id/ImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -43,7 +43,7 @@
         android:textColor="@color/grey"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imAds"
+        app:layout_constraintStart_toEndOf="@+id/ImageView"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <TextView
@@ -53,10 +53,31 @@
         android:gravity="center_horizontal"
         android:text="TextView"
         android:textColor="@color/grey"
-        app:layout_constraintBottom_toBottomOf="@+id/imAds"
+        app:layout_constraintBottom_toBottomOf="@+id/ImageView"
         app:layout_constraintEnd_toEndOf="@+id/tvPriceTel"
         app:layout_constraintStart_toStartOf="@+id/tvPriceTel"
         app:layout_constraintTop_toBottomOf="@+id/tvPriceTel" />
+
+    <LinearLayout
+        android:id="@+id/view_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_layout"
+        app:layout_constraintEnd_toStartOf="@+id/edit_layout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_layout">
+
+        <ImageButton
+            android:id="@+id/imLook"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:src="@android:drawable/ic_menu_search" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/edit_layout"

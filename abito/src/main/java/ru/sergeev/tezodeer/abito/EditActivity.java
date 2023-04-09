@@ -54,6 +54,7 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_layout);
         init();
+
     }
     private void init()
     {
@@ -72,21 +73,18 @@ public class EditActivity extends AppCompatActivity {
     }
     private void getMyIntent()
     {
-        if(getIntent() != null)
-        {
             Intent i = getIntent();
             edit_state = i.getBooleanExtra(MyConstants.EDIT_STATE,false);
-            if(edit_state = true) setDataAds(i);
+            if(edit_state)setDataAds(i);
         }
-    }
     private void setDataAds(Intent i)
     {
+        edit_state = true;
         Picasso.get().load(i.getStringExtra(MyConstants.IMAGE_ID)).into(imItem);
         edTel.setText(i.getStringExtra(MyConstants.TEL));
         edTitle.setText(i.getStringExtra(MyConstants.TITLE));
         edPrice.setText(i.getStringExtra(MyConstants.PRICE));
         edDisc.setText(i.getStringExtra(MyConstants.DISK));
-        spinner.setEnabled(false);
         temp_cat = i.getStringExtra(MyConstants.CAT);
         temp_uid = i.getStringExtra(MyConstants.UID);
         temp_time = i.getStringExtra(MyConstants.TIME);
@@ -163,7 +161,7 @@ public class EditActivity extends AppCompatActivity {
         });
     }
     public void onClickSavePost(View v) {
-        if(edit_state = false)
+        if(!edit_state)
         {
             uploadImage();
         }
@@ -178,7 +176,6 @@ public class EditActivity extends AppCompatActivity {
                 updatePost();
             }
         }
-        finish();
     }
     public void onClickImage (View v) {
         getImage();
@@ -204,6 +201,7 @@ public class EditActivity extends AppCompatActivity {
             post.setTime(temp_time);
             post.setUid(temp_uid);
             dReference.child(temp_key).child("anuncio").setValue(post);
+        finish();
     }
     private void savePost()
     {
@@ -226,5 +224,6 @@ public class EditActivity extends AppCompatActivity {
             if(key != null)dReference.child(key).child("anuncio").setValue(post);
 
         }
+        finish();
     }
 }

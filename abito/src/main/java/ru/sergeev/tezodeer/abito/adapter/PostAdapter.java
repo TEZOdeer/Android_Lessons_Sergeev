@@ -1,11 +1,9 @@
 package ru.sergeev.tezodeer.abito.adapter;
 
 import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.style.TtsSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,11 +32,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
     private Context context;
     private OnItemClickCustom onItemClickCustom;
     private DbManager dbManager;
+    private AlertDialog dialog;
 
-    public PostAdapter(List<NewPost> arrayPost, Context context, OnItemClickCustom onItemClickCustom) {
+
+    public PostAdapter(List<NewPost> arrayPost, Context context, OnItemClickCustom onItemClickCustom, NewPost newPost) {
         this.arrayPost = arrayPost;
         this.context = context;
-        this.onItemClickCustom = this.onItemClickCustom;
+        this.onItemClickCustom = onItemClickCustom;
         this.dbManager = dbManager;
     }
 
@@ -72,16 +70,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
         private ImageButton deleteButton;
         private ImageButton editButton;
         private Spinner spinner;
+        private ImageButton look;
+        private ImageView image;
+        private TextView title;
+        private TextView price;
+        private TextView tel;
+        private TextView desk;
 
 
         public ViewHolderData(@NonNull View itemView, OnItemClickCustom onItemClickCustom) {
             super(itemView);
+            look = itemView.findViewById(R.id.imLook);
+
+
+
             spinner = itemView.findViewById(R.id.spinner);
             tvPriceTel = itemView.findViewById(R.id.tvPriceTel);
             tvDisc = itemView.findViewById(R.id.tvDisk);
             edit_layout = itemView.findViewById(R.id.edit_layout);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            imAds = itemView.findViewById(R.id.imAds);
+            imAds = itemView.findViewById(R.id.ImageView);
             deleteButton = itemView.findViewById(R.id.imDeleteItem);
             editButton = itemView.findViewById(R.id.imEditItem);
             itemView.setOnClickListener(this);
@@ -135,12 +143,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
                     context.startActivity(i);
                 }
             });
+            look.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Look(newPost);
+                }
+            });
+
         }
 
         @Override
         public void onClick(View v)
         {
-            onItemClickCustom.onItemSelected(getAdapterPosition());
+            int a = 0;
         }
     }
     private void deleteDialog(NewPost newPost, int position)
@@ -167,6 +182,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
     public interface OnItemClickCustom
     {
         void onItemSelected(int position);
+    }
+    public void Look(NewPost newPost)
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.view_ads, null);
+        builder.setView(dialogView);
+        TextView title = dialogView.findViewById(R.id.TitleView);
+        TextView price = dialogView.findViewById(R.id.Price);
+        TextView tel = dialogView.findViewById(R.id.Tel);
+        TextView desk  = dialogView.findViewById(R.id.Desk);
+        ImageView image = dialogView.findViewById(R.id.ImageView);
+
+        Picasso.get().load(newPost.getImageId()).into(image);
+        title.setText(newPost.getTitle());
+        price.setText("Цена: " + newPost.getPrice());
+        tel.setText("Телефон: " + newPost.getTel());
+        desk.setText("Описание: " + newPost.getDisk());
+
+        dialog = builder.create();
+        dialog.show();
     }
     public void updateAdapter(List<NewPost> listData)
     {

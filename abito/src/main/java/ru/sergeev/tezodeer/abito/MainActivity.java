@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 import ru.sergeev.tezodeer.abito.adapter.DataSender;
 import ru.sergeev.tezodeer.abito.adapter.PostAdapter;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DbManager dbManager;
     private Context contextDB;
     public static String MAUTH = "";
+    private String current_cat = "Машины";
+    private NewPost newPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +67,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("MyLog","On Create");
         setContentView(R.layout.activity_main);
         init();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("MyLog","On Resume");
+        Log.d("MyLog", "On Resume");
+        if(current_cat.equals("my_ads"))
+        {
+            dbManager.getMyAdsDataFromDb(mAuth.getUid());
+        }
+        else
+        {
+            dbManager.getDataFromDb(current_cat);
+        }
     }
 
     private void init()
@@ -80,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fb = findViewById(R.id.floatingActionButton2);
         List<NewPost> arrayPost = new ArrayList<>();
 
-        postAdapter = new PostAdapter(arrayPost, this,onItemClickCustom);
+        postAdapter = new PostAdapter(arrayPost, this,onItemClickCustom, null);
         rcView.setAdapter(postAdapter);
         nav_view = findViewById(R.id.nav_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -91,13 +103,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nav_view.setNavigationItemSelectedListener(this);
         userEmail = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tvEmail);
         mAuth = FirebaseAuth.getInstance();
-
-
         getDataDB();
         dbManager = new DbManager(dataSender, this);
-        dbManager.getDataFromDb("Машины");
+
         postAdapter.setDbManager(dbManager);
 
+        getUserData();
     }
 
     private void getDataDB()
@@ -117,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onItemClickCustom = new PostAdapter.OnItemClickCustom() {
             @Override
             public void onItemSelected(int position) {
+
             }
         };
     }
@@ -127,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void onClickEdit(View v)
     {
-        Intent i = new Intent(MainActivity.this, EditActivity.class);
-        startActivity(i);
+            Intent i = new Intent(MainActivity.this, EditActivity.class);
+            startActivity(i);
     }
     private void getUserData()
     {
@@ -150,18 +162,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.id_my_ads:
+                current_cat = "my_ads";
                 dbManager.getMyAdsDataFromDb(mAuth.getUid());
                 break;
             case R.id.id_cars_ads:
+                current_cat = "Машины";
                 dbManager.getDataFromDb("Машины");
                 break;
             case R.id.id_pc_ads:
+                current_cat = "Компьютеры";
                 dbManager.getDataFromDb("Компьютеры");
                 break;
             case R.id.id_smartphone_ads:
+                current_cat = "Смартфоны";
                 dbManager.getDataFromDb("Смартфоны");
                 break;
             case R.id.id_dm_ads:
+                current_cat = "Бытовая техника";
                 dbManager.getDataFromDb("Бытовая техника");
                 break;
             case R.id.id_sign_up:
@@ -173,10 +190,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.id_sign_out:
                 signOut();
                 break;
-            case R.id.startz:
-                Intent a = new Intent(this, EditActivity.class);
-                startActivity(a);
-
         }
         return false;
     }
