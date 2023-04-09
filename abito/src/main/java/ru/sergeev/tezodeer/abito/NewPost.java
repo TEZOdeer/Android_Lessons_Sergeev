@@ -19,6 +19,16 @@ public class NewPost {
     private String uid;
     private String time;
 
+    public String getCat() {
+        return cat;
+    }
+
+    public void setCat(String cat) {
+        this.cat = cat;
+    }
+
+    private String cat;
+
     public String getUid() {
         return uid;
     }

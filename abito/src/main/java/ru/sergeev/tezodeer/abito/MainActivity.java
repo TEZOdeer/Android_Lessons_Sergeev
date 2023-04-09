@@ -2,6 +2,7 @@ package ru.sergeev.tezodeer.abito;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,14 +55,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PostAdapter postAdapter;
     private DataSender dataSender;
     private DbManager dbManager;
+    private Context contextDB;
     public static String MAUTH = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("MyLog","On Create");
         setContentView(R.layout.activity_main);
         init();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MyLog","On Resume");
+    }
+
     private void init()
     {
         setOnItemClickCustom();
@@ -84,8 +94,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         getDataDB();
-        dbManager = new DbManager(dataSender);
+        dbManager = new DbManager(dataSender, this);
         dbManager.getDataFromDb("Машины");
+        postAdapter.setDbManager(dbManager);
 
     }
 
