@@ -25,6 +25,7 @@ import ru.sergeev.tezodeer.abito.EditActivity;
 import ru.sergeev.tezodeer.abito.MainActivity;
 import ru.sergeev.tezodeer.abito.NewPost;
 import ru.sergeev.tezodeer.abito.R;
+import ru.sergeev.tezodeer.abito.ShowLayoutActivity;
 import ru.sergeev.tezodeer.abito.utils.MyConstants;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData> {
@@ -63,7 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
 
     public class ViewHolderData extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        private TextView tvPriceTel, tvDisc, tvTitle;
+        private TextView tvPriceTel, tvDisc, tvTitle, tvTotalViews;
         private ImageView imAds;
         private LinearLayout edit_layout;
         private OnItemClickCustom onItemClickCustom;
@@ -81,9 +82,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
         public ViewHolderData(@NonNull View itemView, OnItemClickCustom onItemClickCustom) {
             super(itemView);
             look = itemView.findViewById(R.id.imLook);
-
-
-
+            tvTotalViews = itemView.findViewById(R.id.tvTotalViews);
             spinner = itemView.findViewById(R.id.spinner);
             tvPriceTel = itemView.findViewById(R.id.tvPriceTel);
             tvDisc = itemView.findViewById(R.id.tvDisk);
@@ -109,7 +108,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
             tvTitle.setText(newPost.getTitle());
             String price_tel = "Цена: " + newPost.getPrice() + " Тел: " + newPost.getTel();
             tvPriceTel.setText(price_tel);
-            String textDisk = null;
+            String textDisk;
             if(newPost.getDisk().length() > 50)
             {
                 textDisk = newPost.getDisk().substring(0, 50) + "...";
@@ -119,6 +118,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
                 textDisk = newPost.getDisk();
             }
             tvDisc.setText(textDisk);
+            tvTotalViews.setText(newPost.getTotal_views());
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -140,22 +140,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
                     i.putExtra(MyConstants.TIME, newPost.getTime());
                     i.putExtra(MyConstants.CAT, newPost.getCat());
                     i.putExtra(MyConstants.EDIT_STATE, true);
+                    i.putExtra(MyConstants.TOTAL_VIEWS,newPost.getTotal_views());
                     context.startActivity(i);
                 }
             });
+            //LOOK_init
+            /*
             look.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
                     Look(newPost);
                 }
             });
-
+             */
         }
 
         @Override
         public void onClick(View v)
         {
-            int a = 0;
+            NewPost newPost = arrayPost.get(getAdapterPosition());
+            dbManager.updateTotalViews(newPost);
+            Intent i = new Intent(context, ShowLayoutActivity.class);
+            i.putExtra(MyConstants.IMAGE_ID, newPost.getImageId());
+            i.putExtra(MyConstants.TITLE, newPost.getTitle());
+            i.putExtra(MyConstants.PRICE, newPost.getPrice());
+            i.putExtra(MyConstants.TEL, newPost.getTel());
+            i.putExtra(MyConstants.DISK, newPost.getDisk());
+            context.startActivity(i);
+            onItemClickCustom.onItemSelected(getAdapterPosition());
         }
     }
     private void deleteDialog(NewPost newPost, int position)
@@ -183,6 +195,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
     {
         void onItemSelected(int position);
     }
+    //LOOK
+    /*
     public void Look(NewPost newPost)
     {
 
@@ -205,6 +219,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
         dialog = builder.create();
         dialog.show();
     }
+    */
     public void updateAdapter(List<NewPost> listData)
     {
         arrayPost.clear();

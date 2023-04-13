@@ -46,6 +46,7 @@ public class EditActivity extends AppCompatActivity {
     private String temp_cat = "";
     private String temp_uid = "";
     private String temp_time = "";
+    private String temp_total_views = "";
     private String temp_key = "";
     private String temp_image_url = "";
     private Boolean is_image_update = false;
@@ -90,6 +91,7 @@ public class EditActivity extends AppCompatActivity {
         temp_time = i.getStringExtra(MyConstants.TIME);
         temp_key = i.getStringExtra(MyConstants.KEY);
         temp_image_url = i.getStringExtra(MyConstants.IMAGE_ID);
+        temp_total_views = i.getStringExtra(MyConstants.TOTAL_VIEWS);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -200,6 +202,7 @@ public class EditActivity extends AppCompatActivity {
             post.setDisk(edDisc.getText().toString());
             post.setTime(temp_time);
             post.setUid(temp_uid);
+            post.setTotal_views(temp_total_views);
             dReference.child(temp_key).child("anuncio").setValue(post);
         finish();
     }
@@ -220,6 +223,7 @@ public class EditActivity extends AppCompatActivity {
             post.setKey(key);
             post.setTime(String.valueOf(System.nanoTime()));
             post.setUid(firebaseAuth.getUid());
+            post.setTotal_views("0");
 
             if(key != null)dReference.child(key).child("anuncio").setValue(post);
 

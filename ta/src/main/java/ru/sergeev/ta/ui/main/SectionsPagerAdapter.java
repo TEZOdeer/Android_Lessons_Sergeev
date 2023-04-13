@@ -7,11 +7,11 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import ru.sergeev.ta.FirstActivity;
+import com.example.april.FirstActivity;
+import com.example.april.SecondActivity;
+import com.example.april.ThirdActivity;
 import ru.sergeev.ta.R;
-import ru.sergeev.ta.SecondActivity;
-import ru.sergeev.ta.ThirdActivity;
+
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
