@@ -1,7 +1,10 @@
 package ru.sergeev.tezodeer.abito;
 
 import static android.content.ContentValues.TAG;
+import static android.os.Build.VERSION_CODES.M;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonUiContext;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;;
 
 import androidx.annotation.NonNull;
@@ -24,6 +30,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.OnPaidEventListener;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.ResponseInfo;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,8 +46,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.yandex.mobile.ads.banner.AdSize;
+import com.yandex.mobile.ads.banner.BannerAdEventListener;
+import com.yandex.mobile.ads.banner.BannerAdView;
+import com.yandex.mobile.ads.common.AdRequest;
+import com.yandex.mobile.ads.common.AdRequestError;
+import com.yandex.mobile.ads.common.ImpressionData;
+import com.yandex.mobile.ads.common.InitializationListener;
+import com.yandex.mobile.ads.common.MobileAds;
+import com.yandex.mobile.ads.interstitial.InterstitialAd;
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +67,7 @@ import java.util.concurrent.locks.Lock;
 import ru.sergeev.tezodeer.abito.adapter.DataSender;
 import ru.sergeev.tezodeer.abito.adapter.PostAdapter;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     private NavigationView nav_view;
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
@@ -60,19 +84,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String MAUTH = "";
     private String current_cat = "Машины";
     private NewPost newPost;
+    private final int EDIT_RES = 12;
+    private BannerAdView bannerAdView;
+    private static final String YANDEX_AD_UNIT_ID = "demo-banner-yandex";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("MyLog","On Create");
         setContentView(R.layout.activity_main);
+        AddAds();
         init();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        /*
+        if(adView != null)
+        {
+            adView.resume();
+        }
+         */
         Log.d("MyLog", "On Resume");
         if(current_cat.equals("my_ads"))
         {
@@ -82,6 +114,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             dbManager.getDataFromDb(current_cat);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        /*
+        if(adView != null)
+        {
+            adView.pause();
+        }
+         */
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*
+        if(adView != null)
+        {
+            adView.destroy();
+        }
+         */
     }
 
     private void init()
@@ -109,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         postAdapter.setDbManager(dbManager);
 
         getUserData();
+
     }
 
     private void getDataDB()
@@ -134,13 +189,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == EDIT_RES && resultCode == RESULT_OK && data != null)
+        {
+            current_cat = data.getStringExtra("cat");
+        }
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }
     public void onClickEdit(View v)
     {
             Intent i = new Intent(MainActivity.this, EditActivity.class);
-            startActivity(i);
+            startActivityForResult(i, EDIT_RES);
     }
     private void getUserData()
     {
@@ -272,5 +336,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth.signOut();
         getUserData();
     }
+    private void AddAds() {
+        MobileAds.initialize(this, new InitializationListener() {
+            @Override
+            public void onInitializationCompleted() {
+            }
+        });
+        bannerAdView = new BannerAdView(this);
+        bannerAdView = findViewById(R.id.adView);
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+
+        bannerAdView.setAdUnitId(YANDEX_AD_UNIT_ID);
+        bannerAdView.setAdSize(AdSize.BANNER_320x100);
+
+        bannerAdView.loadAd(adRequest);
+    }
 }

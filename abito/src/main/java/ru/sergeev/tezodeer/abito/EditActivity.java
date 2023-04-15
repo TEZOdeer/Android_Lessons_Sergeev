@@ -1,5 +1,6 @@
 package ru.sergeev.tezodeer.abito;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -50,6 +51,7 @@ public class EditActivity extends AppCompatActivity {
     private String temp_key = "";
     private String temp_image_url = "";
     private Boolean is_image_update = false;
+    private ProgressDialog pd;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,8 @@ public class EditActivity extends AppCompatActivity {
     }
     private void init()
     {
+        pd = new ProgressDialog(this);
+        pd.setMessage("Идёт загрузка...");
         edTitle = findViewById(R.id.edTitile);
         edPrice = findViewById(R.id.edPrice);
         edTel = findViewById(R.id.edTel);
@@ -163,6 +167,7 @@ public class EditActivity extends AppCompatActivity {
         });
     }
     public void onClickSavePost(View v) {
+        pd.show();
         if(!edit_state)
         {
             uploadImage();
@@ -204,7 +209,7 @@ public class EditActivity extends AppCompatActivity {
             post.setUid(temp_uid);
             post.setTotal_views(temp_total_views);
             dReference.child(temp_key).child("anuncio").setValue(post);
-        finish();
+            finish();
     }
     private void savePost()
     {
@@ -221,13 +226,22 @@ public class EditActivity extends AppCompatActivity {
             post.setCat(spinner.getSelectedItem().toString());
             post.setDisk(edDisc.getText().toString());
             post.setKey(key);
-            post.setTime(String.valueOf(System.nanoTime()));
+            post.setTime(String.valueOf(System.currentTimeMillis()));
             post.setUid(firebaseAuth.getUid());
             post.setTotal_views("0");
 
             if(key != null)dReference.child(key).child("anuncio").setValue(post);
+            Intent i = new Intent();
+            i.putExtra("cat", spinner.getSelectedItem().toString());
+            setResult(RESULT_OK, i);
 
         }
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pd.dismiss();
     }
 }

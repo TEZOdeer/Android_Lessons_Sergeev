@@ -81,7 +81,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
 
         public ViewHolderData(@NonNull View itemView, OnItemClickCustom onItemClickCustom) {
             super(itemView);
-            look = itemView.findViewById(R.id.imLook);
             tvTotalViews = itemView.findViewById(R.id.tvTotalViews);
             spinner = itemView.findViewById(R.id.spinner);
             tvPriceTel = itemView.findViewById(R.id.tvPriceTel);
