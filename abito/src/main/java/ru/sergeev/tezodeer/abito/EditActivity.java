@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,8 @@ import java.io.ByteArrayOutputStream;
 
 import javax.microedition.khronos.egl.EGLDisplay;
 
+import ru.sergeev.tezodeer.abito.adapter.ImageAdapter;
+import ru.sergeev.tezodeer.abito.screens.ChooseImagesActivity;
 import ru.sergeev.tezodeer.abito.utils.MyConstants;
 
 public class EditActivity extends AppCompatActivity {
@@ -61,6 +64,11 @@ public class EditActivity extends AppCompatActivity {
     }
     private void init()
     {
+
+//        ViewPager vp = findViewById(R.id.view_pager);
+//        ImageAdapter imAdapter = new ImageAdapter(this);
+//        vp.setAdapter(imAdapter);
+
         pd = new ProgressDialog(this);
         pd.setMessage("Идёт загрузка...");
         edTitle = findViewById(R.id.edTitile);
@@ -96,18 +104,6 @@ public class EditActivity extends AppCompatActivity {
         temp_key = i.getStringExtra(MyConstants.KEY);
         temp_image_url = i.getStringExtra(MyConstants.IMAGE_ID);
         temp_total_views = i.getStringExtra(MyConstants.TOTAL_VIEWS);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10 && data != null && data.getData() != null)
-        {
-            if (resultCode == RESULT_OK)
-            {
-                imItem.setImageURI(data.getData());
-
-            }
-        }
     }
     private void uploadImage()
     {
@@ -184,16 +180,24 @@ public class EditActivity extends AppCompatActivity {
             }
         }
     }
-    public void onClickImage (View v) {
-        getImage();
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 15 && data != null && data.getData() != null)
+        {
+            if (resultCode == RESULT_OK)
+            {
+
+            }
+        }
     }
-    private void getImage()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 10);
+
+    public void onClickImage (View view) {
+        Intent i = new Intent(EditActivity.this, ChooseImagesActivity.class);
+        startActivityForResult(i, 15);
     }
+
     private void updatePost()
     {
         dReference = FirebaseDatabase.getInstance().getReference(temp_cat);
