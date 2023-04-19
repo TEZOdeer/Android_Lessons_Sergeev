@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".screens.ChooseImagesActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:onClick="onClickBack"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_back" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,28 +29,31 @@
         <ImageView
             android:id="@+id/mainImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_background_normal"
             android:onClick="OnClickMainImage"
+            android:padding="10dp"
             app:srcCompat="@drawable/ic_add" />
 
         <ImageView
             android:id="@+id/image2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_background_normal"
             android:onClick="OnClickImage2"
+            android:padding="10dp"
             app:srcCompat="@drawable/ic_add" />
 
         <ImageView
             android:id="@+id/image3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:drawable/editbox_background_normal"
             android:onClick="OnClickImage3"
+            android:padding="10dp"
             app:srcCompat="@drawable/ic_add" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -32,9 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
-import javax.microedition.khronos.egl.EGLDisplay;
-
-import ru.sergeev.tezodeer.abito.adapter.ImageAdapter;
 import ru.sergeev.tezodeer.abito.screens.ChooseImagesActivity;
 import ru.sergeev.tezodeer.abito.utils.MyConstants;
 
@@ -64,11 +62,6 @@ public class EditActivity extends AppCompatActivity {
     }
     private void init()
     {
-
-//        ViewPager vp = findViewById(R.id.view_pager);
-//        ImageAdapter imAdapter = new ImageAdapter(this);
-//        vp.setAdapter(imAdapter);
-
         pd = new ProgressDialog(this);
         pd.setMessage("Идёт загрузка...");
         edTitle = findViewById(R.id.edTitile);
@@ -184,18 +177,21 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 15 && data != null && data.getData() != null)
+        Log.d("Mylog", "WubaWuba DabDab " + data);
+        if(requestCode == 15 && data != null)
         {
             if (resultCode == RESULT_OK)
             {
-
+                Log.d("MyLog", "uri Main " + data.getStringExtra("uriMain"));
+                Log.d("MyLog", "uri 2 " + data.getStringExtra("uri2"));
+                Log.d("MyLog", "uri 3 " + data.getStringExtra("uri3"));
             }
         }
     }
 
-    public void onClickImage (View view) {
-        Intent i = new Intent(EditActivity.this, ChooseImagesActivity.class);
-        startActivityForResult(i, 15);
+    public void onClickChooseImage (View v) {
+        Intent e = new Intent(this, ChooseImagesActivity.class);
+        startActivityForResult(e, 15);
     }
 
     private void updatePost()

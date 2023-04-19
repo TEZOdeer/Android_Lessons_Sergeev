@@ -6,16 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import ru.sergeev.tezodeer.abito.R;
 
 public class ChooseImagesActivity extends AppCompatActivity {
     private String uriMain, uri2, uri3;
+    private ImageView imMain, im2, im3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_images);
+        init();
+    }
+    private void init()
+    {
+        imMain = findViewById(R.id.mainImage);
+        im2 = findViewById(R.id.image2);
+        im3 = findViewById(R.id.image3);
     }
 
 
@@ -28,32 +37,47 @@ public class ChooseImagesActivity extends AppCompatActivity {
             {
                 case 1:
                     uriMain = data.getData().toString();
+                    imMain.setImageURI(data.getData());
                     break;
                 case 2:
                     uri2 = data.getData().toString();
+                    im2.setImageURI(data.getData());
                     break;
                 case 3:
                     uri3 = data.getData().toString();
+                    im3.setImageURI(data.getData());
                     break;
             }
         }
     }
 
-    public void OnClickMainImage (View v) {
+    public void OnClickMainImage (View view) {
         getImage(1);
     }
-    public void OnClickImage2 (View v) {
+    public void OnClickImage2 (View view) {
         getImage(2);
     }
-    public void OnClickImage3 (View v) {
+    public void OnClickImage3 (View view) {
         getImage(3);
     }
-
+    public void onClickBack (View view) {
+        Intent e = new Intent();
+        e.putExtra("uriMain",uriMain);
+        e.putExtra("uri2",uri2);
+        e.putExtra("uri3",uri3);
+        setResult(RESULT_OK,e);
+        finish();
+    }
     private void getImage(int index)
     {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, index);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

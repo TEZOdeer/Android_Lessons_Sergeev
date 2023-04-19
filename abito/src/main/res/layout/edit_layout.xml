@@ -12,7 +12,7 @@
         android:layout_height="200dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:onClick="onClickImage"
+        android:onClick="onClickChooseImage"
         android:src="@android:drawable/ic_menu_gallery"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"

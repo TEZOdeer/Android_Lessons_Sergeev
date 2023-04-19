@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Lessons_Sergeev">
         <activity
-            android:name=".ChooseImagesActivity"
+            android:name=".screens.ChooseImagesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
