@@ -34,35 +34,77 @@ public class DbManager {
     private FirebaseStorage fs;
     private String[] category_ads = {"Машины", "Компьютеры", "Смартфоны", "Бытовая техника"};
 
+    private int delete_image_counter = 0;
+
     public void deleteitem(NewPost newPost)
     {
-        StorageReference sRef = fs.getReferenceFromUrl(newPost.getImageId());
-        sRef.delete().addOnSuccessListener(new OnSuccessListener<Void>()
+
+        StorageReference sRef = null;
+        switch (delete_image_counter)
         {
-                @Override
-                public void onSuccess(Void unused)
+            case 0:
+                if(!newPost.getImageId().equals("null"))
+                    sRef = fs.getReferenceFromUrl(newPost.getImageId());
+                else
                 {
-                    DatabaseReference dbRef = db.getReference(newPost.getCat());
-                    dbRef.child(newPost.getKey()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>()
-                    {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(contextDB, R.string.item_deleted, Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener()
+                    delete_image_counter ++;
+                    deleteitem(newPost);
+                }
+                break;
+            case 1:
+                if(!newPost.getImageId2().equals("null"))
+                    sRef = fs.getReferenceFromUrl(newPost.getImageId2());
+                else
                 {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(contextDB , "An error occurred, item not deleted", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    delete_image_counter ++;
+                    deleteitem(newPost);
+                }
+                break;
+            case 2:
+                if(!newPost.getImageId3().equals("null"))
+                    sRef = fs.getReferenceFromUrl(newPost.getImageId3());
+                else
+                {
+                    deleteDBItem(newPost);
+                    sRef = null;
+                    delete_image_counter = 0;
+                }
+                break;
+        }
+        if(sRef == null)return;
+        sRef.delete().addOnSuccessListener(unused -> {
+            delete_image_counter ++;
+            if(delete_image_counter < 3)
+            {
+                deleteitem(newPost);
             }
-            }).addOnFailureListener(new OnFailureListener()
+            else
+            {
+                delete_image_counter = 0;
+            }
+        }).addOnFailureListener(new OnFailureListener()
         {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+                Toast.makeText(contextDB, "An error occurred, image not deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+        private void deleteDBItem (NewPost newPost)
+        {
+            DatabaseReference dbRef = db.getReference(newPost.getCat());
+            dbRef.child(newPost.getKey()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>()
+            {
                 @Override
-                public void onFailure(@NonNull Exception e)
-                {
-                    Toast.makeText(contextDB, "An error occurred, image not deleted", Toast.LENGTH_SHORT).show();
+                public void onSuccess(Void unused) {
+                    Toast.makeText(contextDB, R.string.item_deleted, Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener()
+            {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(contextDB , "An error occurred, item not deleted", Toast.LENGTH_SHORT).show();
                 }
             });
         }
