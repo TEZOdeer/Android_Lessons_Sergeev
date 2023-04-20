@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import ru.sergeev.tezodeer.abito.screens.ChooseImagesActivity;
 import ru.sergeev.tezodeer.abito.utils.MyConstants;
@@ -39,7 +41,7 @@ import ru.sergeev.tezodeer.abito.utils.MyConstants;
 public class EditActivity extends AppCompatActivity {
     private ImageView imItem;
     private StorageReference mStorageRef;
-    private Uri uploadUri;
+    private Uri[] uploadUri= new Uri[3];
     private Spinner spinner;
     private DatabaseReference dReference;
     private FirebaseAuth firebaseAuth;
@@ -53,6 +55,8 @@ public class EditActivity extends AppCompatActivity {
     private String temp_image_url = "";
     private Boolean is_image_update = false;
     private ProgressDialog pd;
+    private String[] uris = new String[3];
+    private int load_image_counter = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,9 +102,9 @@ public class EditActivity extends AppCompatActivity {
         temp_image_url = i.getStringExtra(MyConstants.IMAGE_ID);
         temp_total_views = i.getStringExtra(MyConstants.TOTAL_VIEWS);
     }
-    private void uploadImage()
-    {
-        Bitmap bitmap = ((BitmapDrawable)imItem.getDrawable()).getBitmap();
+    private void uploadImage() throws IOException {
+        Bitmap bitmap = null;
+        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uris[load_image_counter]));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 25,out);
         byte[] byteArray = out.toByteArray();
@@ -114,10 +118,24 @@ public class EditActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-            uploadUri = task.getResult();
+            uploadUri[load_image_counter] = task.getResult();
             assert uploadUri != null;
+            load_image_counter ++;
+            if(load_image_counter < uris.length)
+            {
+                try {
+                    uploadImage();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
                 savePost();
                 Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -126,9 +144,9 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
-    private void updateImage()
-    {
-        Bitmap bitmap = ((BitmapDrawable)imItem.getDrawable()).getBitmap();
+    private void updateImage() throws IOException {
+        Bitmap bitmap = null;
+        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uris[load_image_counter]));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 25,out);
         byte[] byteArray = out.toByteArray();
@@ -142,7 +160,7 @@ public class EditActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                uploadUri = task.getResult();
+                uploadUri[load_image_counter] = task.getResult();
                 assert uploadUri != null;
                 temp_image_url = uploadUri.toString();
                 updatePost();
@@ -155,7 +173,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
-    public void onClickSavePost(View v) {
+    public void onClickSavePost(View v) throws IOException {
         pd.show();
         if(!edit_state)
         {
@@ -185,6 +203,9 @@ public class EditActivity extends AppCompatActivity {
                 Log.d("MyLog", "uri Main " + data.getStringExtra("uriMain"));
                 Log.d("MyLog", "uri 2 " + data.getStringExtra("uri2"));
                 Log.d("MyLog", "uri 3 " + data.getStringExtra("uri3"));
+                uris[0] = data.getStringExtra("uriMain");
+                uris[1] = data.getStringExtra("uri2");
+                uris[2] = data.getStringExtra("uri3");
             }
         }
     }

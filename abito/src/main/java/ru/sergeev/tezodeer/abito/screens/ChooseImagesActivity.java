@@ -72,12 +72,30 @@ public class ChooseImagesActivity extends AppCompatActivity {
     {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(intent, index);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void onClickDeleteMainImage(View view)
+    {
+        imMain.setImageResource(android.R.drawable.ic_menu_add);
+        uriMain = "null";
+    }
+
+    public void onClickDeleteImage2(View view)
+    {
+        im2.setImageResource(android.R.drawable.ic_menu_add);
+        uri2 = "null";
+    }
+
+    public void onClickDeleteImage3(View view)
+    {
+        im3.setImageResource(android.R.drawable.ic_menu_add);
+        uri3 = "null";
     }
 }

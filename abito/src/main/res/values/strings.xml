@@ -34,4 +34,10 @@
     <!-- ShowActivity -->
     <string name="price">Цена:</string>
     <string name="tel">Телефон:</string>
+    
+    <!-- ChooseImageActivity -->
+    <string name="main_image">Главное фото</string>
+    <string name="image2">Фото 2</string>
+    <string name="image3">Фото 3</string>
+
 </resources>
