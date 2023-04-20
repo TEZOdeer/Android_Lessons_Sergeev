@@ -36,15 +36,16 @@ public class DbManager {
 
     private int delete_image_counter = 0;
 
-    public void deleteitem(NewPost newPost)
+    public void deleteitem(final NewPost newPost)
     {
 
         StorageReference sRef = null;
         switch (delete_image_counter)
         {
             case 0:
-                if(!newPost.getImageId().equals("null"))
+                if(!newPost.getImageId().equals("null")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId());
+                }
                 else
                 {
                     delete_image_counter ++;
@@ -52,8 +53,9 @@ public class DbManager {
                 }
                 break;
             case 1:
-                if(!newPost.getImageId2().equals("null"))
+                if(!newPost.getImageId2().equals("null")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId2());
+                }
                 else
                 {
                     delete_image_counter ++;
@@ -61,8 +63,9 @@ public class DbManager {
                 }
                 break;
             case 2:
-                if(!newPost.getImageId3().equals("null"))
+                if(!newPost.getImageId3().equals("null")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId3());
+                }
                 else
                 {
                     deleteDBItem(newPost);
@@ -71,16 +74,22 @@ public class DbManager {
                 }
                 break;
         }
-        if(sRef == null)return;
-        sRef.delete().addOnSuccessListener(unused -> {
-            delete_image_counter ++;
-            if(delete_image_counter < 3)
+        if(sRef == null) return;
+
+        sRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused)
             {
-                deleteitem(newPost);
-            }
-            else
-            {
-                delete_image_counter = 0;
+                delete_image_counter ++;
+                if(delete_image_counter < 3)
+                {
+                    deleteitem(newPost);
+                }
+                else
+                {
+                    delete_image_counter = 0;
+                    deleteDBItem(newPost);
+                }
             }
         }).addOnFailureListener(new OnFailureListener()
         {
