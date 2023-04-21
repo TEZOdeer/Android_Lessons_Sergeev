@@ -43,7 +43,7 @@ public class DbManager {
         switch (delete_image_counter)
         {
             case 0:
-                if(!newPost.getImageId().equals("null")) {
+                if(!newPost.getImageId().equals("empty")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId());
                 }
                 else
@@ -53,7 +53,7 @@ public class DbManager {
                 }
                 break;
             case 1:
-                if(!newPost.getImageId2().equals("null")) {
+                if(!newPost.getImageId2().equals("empty")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId2());
                 }
                 else
@@ -63,7 +63,7 @@ public class DbManager {
                 }
                 break;
             case 2:
-                if(!newPost.getImageId3().equals("null")) {
+                if(!newPost.getImageId3().equals("empty")) {
                     sRef = fs.getReferenceFromUrl(newPost.getImageId3());
                 }
                 else

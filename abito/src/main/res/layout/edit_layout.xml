@@ -6,19 +6,21 @@
     android:layout_height="match_parent"
     android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/imItem"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:onClick="onClickChooseImage"
-        android:src="@android:drawable/ic_menu_gallery"
-        android:visibility="visible"
+
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+        app:srcCompat="@android:drawable/ic_menu_gallery" >
+
+    </androidx.viewpager.widget.ViewPager>
 
 
 
@@ -30,9 +32,9 @@
         android:ems="10"
         android:hint="@string/ed_ac_title"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/imItem"
+        app:layout_constraintEnd_toEndOf="@+id/view_pager"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imItem"
+        app:layout_constraintStart_toStartOf="@+id/view_pager"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <EditText
@@ -81,9 +83,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/spinner_background"
-        app:layout_constraintEnd_toEndOf="@+id/imItem"
-        app:layout_constraintStart_toStartOf="@+id/imItem"
-        app:layout_constraintTop_toBottomOf="@+id/imItem" />
+        app:layout_constraintEnd_toEndOf="@+id/view_pager"
+        app:layout_constraintStart_toStartOf="@+id/view_pager"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager" />
+
+    <TextView
+        android:id="@+id/tvImagesCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/black"
+        android:padding="5dp"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/view_pager"
+        app:layout_constraintEnd_toEndOf="@+id/view_pager"
+        app:layout_constraintStart_toStartOf="@+id/view_pager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -96,4 +111,16 @@
         android:src="@drawable/ic_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:onClick="onClickChooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/view_pager"
+        app:layout_constraintTop_toTopOf="@+id/view_pager"
+        app:srcCompat="@drawable/ic_edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

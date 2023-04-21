@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,12 +35,14 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import ru.sergeev.tezodeer.abito.adapter.ImageAdapter;
 import ru.sergeev.tezodeer.abito.screens.ChooseImagesActivity;
 import ru.sergeev.tezodeer.abito.utils.MyConstants;
 
 public class EditActivity extends AppCompatActivity {
-    private ImageView imItem;
     private StorageReference mStorageRef;
     private String[] uploadUri= new String[3];
     private Spinner spinner;
@@ -55,8 +58,14 @@ public class EditActivity extends AppCompatActivity {
     private String temp_image_url = "";
     private Boolean is_image_update = false;
     private ProgressDialog pd;
-    private final String[] uris = new String[3];
     private int load_image_counter = 0;
+    private List<String> imagesUris;
+    private ImageAdapter imAdapter;
+    private TextView tvImagesCounter;
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +75,33 @@ public class EditActivity extends AppCompatActivity {
     }
     private void init()
     {
+        tvImagesCounter = findViewById(R.id.tvImagesCounter);
 
-        uploadUri[0] = "null";
-        uploadUri[1] = "null";
-        uploadUri[2] = "null";
+        imagesUris = new ArrayList<>();
+        ViewPager vp = findViewById(R.id.view_pager);
+        imAdapter = new ImageAdapter(this);
+        vp.setAdapter(imAdapter);
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String dataText = position + 1 + "/" + imagesUris.size();
+                tvImagesCounter.setText(dataText);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        uploadUri[0] = "empty";
+        uploadUri[1] = "empty";
+        uploadUri[2] = "empty";
 
         pd = new ProgressDialog(this);
         pd.setMessage("Идёт загрузка...");
@@ -83,7 +115,6 @@ public class EditActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
-        imItem = (ImageView) findViewById(R.id.imItem);
         getMyIntent();
     }
     private void getMyIntent()
@@ -95,7 +126,7 @@ public class EditActivity extends AppCompatActivity {
     private void setDataAds(Intent i)
     {
         edit_state = true;
-        Picasso.get().load(i.getStringExtra(MyConstants.IMAGE_ID)).into(imItem);
+      //Picasso.get().load(i.getStringExtra(MyConstants.IMAGE_ID)).into(imItem);
         edTel.setText(i.getStringExtra(MyConstants.TEL));
         edTitle.setText(i.getStringExtra(MyConstants.TITLE));
         edPrice.setText(i.getStringExtra(MyConstants.PRICE));
@@ -108,12 +139,21 @@ public class EditActivity extends AppCompatActivity {
         temp_total_views = i.getStringExtra(MyConstants.TOTAL_VIEWS);
     }
     private void uploadImage() throws IOException {
-        if(load_image_counter < uris.length) {
-            if (uris[load_image_counter] != null) {
+
+        if(load_image_counter < uploadUri.length) {
+
+            if (!uploadUri[load_image_counter].equals("empty")) {
 
                 Bitmap bitmap = null;
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uris[load_image_counter]));
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uploadUri[load_image_counter]));
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
+                assert bitmap != null;
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
                 byte[] byteArray = out.toByteArray();
                 final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
@@ -130,7 +170,7 @@ public class EditActivity extends AppCompatActivity {
                         uploadUri[load_image_counter] = task.getResult().toString();
                         assert uploadUri != null;
                         load_image_counter++;
-                        if (load_image_counter < uris.length) {
+                        if (load_image_counter < uploadUri.length) {
                             try {
                                 uploadImage();
                             } catch (IOException e) {
@@ -162,7 +202,7 @@ public class EditActivity extends AppCompatActivity {
     }
     private void updateImage() throws IOException {
         Bitmap bitmap = null;
-        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uris[load_image_counter]));
+        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uploadUri[load_image_counter]));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 25,out);
         byte[] byteArray = out.toByteArray();
@@ -219,9 +259,17 @@ public class EditActivity extends AppCompatActivity {
                 Log.d("MyLog", "uri Main " + data.getStringExtra("uriMain"));
                 Log.d("MyLog", "uri 2 " + data.getStringExtra("uri2"));
                 Log.d("MyLog", "uri 3 " + data.getStringExtra("uri3"));
-                uris[0] = data.getStringExtra("uriMain");
-                uris[1] = data.getStringExtra("uri2");
-                uris[2] = data.getStringExtra("uri3");
+                uploadUri[0] = data.getStringExtra("uriMain");
+                uploadUri[1] = data.getStringExtra("uri2");
+                uploadUri[2] = data.getStringExtra("uri3");
+                imagesUris.clear();
+                for (String s : uploadUri)
+                {
+                    if(!s.equals("empty"))imagesUris.add(s);
+                }
+                imAdapter.updateImages(imagesUris);
+                String dataText = 1 + "/" + imagesUris.size();
+                tvImagesCounter.setText(dataText);
             }
         }
     }
@@ -272,7 +320,7 @@ public class EditActivity extends AppCompatActivity {
             post.setTotal_views("0");
 
             if(key != null)dReference.child(key).child("anuncio").setValue(post);
-            Intent i = new Intent();
+            Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             i.putExtra("cat", spinner.getSelectedItem().toString());
             setResult(RESULT_OK, i);
 

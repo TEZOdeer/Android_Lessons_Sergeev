@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import ru.sergeev.tezodeer.abito.R;
 
 public class ChooseImagesActivity extends AppCompatActivity {
-    private String uriMain, uri2, uri3;
+    private String uriMain = "empty", uri2 = "empty", uri3 = "empty";
     private ImageView imMain, im2, im3;
 
     @Override
@@ -84,18 +84,18 @@ public class ChooseImagesActivity extends AppCompatActivity {
     public void onClickDeleteMainImage(View view)
     {
         imMain.setImageResource(android.R.drawable.ic_menu_add);
-        uriMain = "null";
+        uriMain = "empty";
     }
 
     public void onClickDeleteImage2(View view)
     {
         im2.setImageResource(android.R.drawable.ic_menu_add);
-        uri2 = "null";
+        uri2 = "empty";
     }
 
     public void onClickDeleteImage3(View view)
     {
         im3.setImageResource(android.R.drawable.ic_menu_add);
-        uri3 = "null";
+        uri3 = "empty";
     }
 }
