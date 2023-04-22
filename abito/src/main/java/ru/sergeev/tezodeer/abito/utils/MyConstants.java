@@ -5,6 +5,8 @@ import ru.sergeev.tezodeer.abito.MainActivity;
 public class MyConstants {
     public static final String TITLE = "title_" + MainActivity.class.getName();
     public static final String IMAGE_ID = "im_id_" + MainActivity.class.getName();
+    public static final String IMAGE_ID_2 = "im_id_2_" + MainActivity.class.getName();
+    public static final String IMAGE_ID_3 = "im_id_3_" + MainActivity.class.getName();
     public static final String PRICE = "price_" + MainActivity.class.getName();
     public static final String TEL = "tel_" + MainActivity.class.getName();
     public static final String DISK = "disk_" + MainActivity.class.getName();

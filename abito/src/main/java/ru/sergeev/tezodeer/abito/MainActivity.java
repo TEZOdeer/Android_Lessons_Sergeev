@@ -3,11 +3,15 @@ package ru.sergeev.tezodeer.abito;
 import static android.content.ContentValues.TAG;
 import static android.os.Build.VERSION_CODES.M;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Messenger;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -177,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
     }
+
 
     private void setOnItemClickCustom()
     {

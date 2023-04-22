@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +38,18 @@ public class ImageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = inflater.inflate(R.layout.pager_items, container, false);
         ImageView imItem = view.findViewById(R.id.ImageViewPager);
-        imItem.setImageURI(Uri.parse(imagesUris.get(position)));
+        String uri = imagesUris.get(position);
+        if(uri.substring(0,4).equals("http"))
+        {
+            Picasso.get().load(uri).into(imItem);
+        }
+        else
+        {
+            imItem.setImageURI(Uri.parse(imagesUris.get(position)));
+        }
+
         container.addView(view);
+
         return view;
     }
 

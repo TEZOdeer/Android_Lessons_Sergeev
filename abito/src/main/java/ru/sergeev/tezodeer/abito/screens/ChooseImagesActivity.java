@@ -61,7 +61,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
         getImage(3);
     }
     public void onClickBack (View view) {
-        Intent e = new Intent();
+        Intent e = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         e.putExtra("uriMain",uriMain);
         e.putExtra("uri2",uri2);
         e.putExtra("uri3",uri3);
@@ -70,7 +70,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
     }
     private void getImage(int index)
     {
-        Intent intent = new Intent();
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(intent, index);

@@ -3,8 +3,10 @@ package ru.sergeev.tezodeer.abito;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -74,7 +76,7 @@ public class EditActivity extends AppCompatActivity {
 
     }
     private void init()
-    {
+     {
         tvImagesCounter = findViewById(R.id.tvImagesCounter);
 
         imagesUris = new ArrayList<>();
@@ -140,64 +142,133 @@ public class EditActivity extends AppCompatActivity {
     }
     private void uploadImage() throws IOException {
 
-        if(load_image_counter < uploadUri.length) {
+        if(Build.VERSION.SDK_INT <= 28) {
+            if (load_image_counter < uploadUri.length) {
 
-            if (!uploadUri[load_image_counter].equals("empty")) {
+                if (!uploadUri[load_image_counter].equals("empty")) {
 
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uploadUri[load_image_counter]));
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                assert bitmap != null;
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
-                byte[] byteArray = out.toByteArray();
-                final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
-                UploadTask up = mRef.putBytes(byteArray);
-                Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        return mRef.getDownloadUrl();
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(uploadUri[load_image_counter]));
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if(task.getResult() == null)return;
-                        uploadUri[load_image_counter] = task.getResult().toString();
-                        assert uploadUri != null;
-                        load_image_counter++;
-                        if (load_image_counter < uploadUri.length) {
-                            try {
-                                uploadImage();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            savePost();
-                            Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
-                            finish();
+
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    assert bitmap != null;
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
+                    byte[] byteArray = out.toByteArray();
+                    final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
+                    UploadTask up = mRef.putBytes(byteArray);
+                    Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            return mRef.getDownloadUrl();
                         }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.getResult() == null) return;
+                            uploadUri[load_image_counter] = task.getResult().toString();
+                            assert uploadUri != null;
+                            load_image_counter++;
+                            if (load_image_counter < uploadUri.length) {
+                                try {
+                                    uploadImage();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                savePost();
+                                Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    load_image_counter++;
+                    uploadImage();
+                }
             } else {
-                load_image_counter++;
-                uploadImage();
+                pd.show();
+                savePost();
+                finish();
             }
         }
-        else {
-            pd.show();
-            savePost();
-            finish();
+        else
+        {
+            if (load_image_counter < uploadUri.length) {
+
+                if (!uploadUri[load_image_counter].equals("empty")) {
+
+                    Bitmap bitmap = null;
+
+                    ImageDecoder.Source altUpload;
+                    altUpload = ImageDecoder.createSource(getContentResolver(), Uri.parse(uploadUri[load_image_counter]));
+
+
+                    Log.d("MyLog", "Wuba Wuba");
+                    try {
+                        bitmap = ImageDecoder.decodeBitmap(altUpload);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("MyLog", "Wuba Wuba2");
+
+
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    assert bitmap != null;
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
+                    byte[] byteArray = out.toByteArray();
+                    final StorageReference mRef = mStorageRef.child(System.currentTimeMillis() + "_image");
+                    UploadTask up = mRef.putBytes(byteArray);
+                    Task<Uri> task = up.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            return mRef.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.getResult() == null) return;
+                            uploadUri[load_image_counter] = task.getResult().toString();
+                            assert uploadUri != null;
+                            load_image_counter++;
+                            if (load_image_counter < uploadUri.length) {
+                                try {
+                                    uploadImage();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                savePost();
+                                Toast.makeText(EditActivity.this, "Upload done!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+                } else {
+                    load_image_counter++;
+                    uploadImage();
+                }
+            } else {
+                pd.show();
+                savePost();
+                finish();
+            }
         }
     }
     private void updateImage() throws IOException {
@@ -251,14 +322,12 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         Log.d("Mylog", "WubaWuba DabDab " + data);
         if(requestCode == 15 && data != null)
         {
             if (resultCode == RESULT_OK)
             {
-                Log.d("MyLog", "uri Main " + data.getStringExtra("uriMain"));
-                Log.d("MyLog", "uri 2 " + data.getStringExtra("uri2"));
-                Log.d("MyLog", "uri 3 " + data.getStringExtra("uri3"));
                 uploadUri[0] = data.getStringExtra("uriMain");
                 uploadUri[1] = data.getStringExtra("uri2");
                 uploadUri[2] = data.getStringExtra("uri3");
@@ -267,9 +336,17 @@ public class EditActivity extends AppCompatActivity {
                 {
                     if(!s.equals("empty"))imagesUris.add(s);
                 }
+                String dataText;
                 imAdapter.updateImages(imagesUris);
-                String dataText = 1 + "/" + imagesUris.size();
-                tvImagesCounter.setText(dataText);
+                if(imagesUris.size() > 0) {
+                    dataText = 1 + "/" + imagesUris.size();
+                    tvImagesCounter.setText(dataText);
+                }
+                else
+                {
+                    dataText = 0 + "/" + imagesUris.size();
+                    tvImagesCounter.setText(dataText);
+                }
             }
         }
     }

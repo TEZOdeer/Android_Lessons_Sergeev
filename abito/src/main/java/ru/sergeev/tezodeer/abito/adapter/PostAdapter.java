@@ -160,7 +160,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolderData
             NewPost newPost = arrayPost.get(getAdapterPosition());
             dbManager.updateTotalViews(newPost);
             Intent i = new Intent(context, ShowLayoutActivity.class);
+
             i.putExtra(MyConstants.IMAGE_ID, newPost.getImageId());
+            i.putExtra(MyConstants.IMAGE_ID_2, newPost.getImageId2());
+            i.putExtra(MyConstants.IMAGE_ID_3, newPost.getImageId3());
+
             i.putExtra(MyConstants.TITLE, newPost.getTitle());
             i.putExtra(MyConstants.PRICE, newPost.getPrice());
             i.putExtra(MyConstants.TEL, newPost.getTel());
