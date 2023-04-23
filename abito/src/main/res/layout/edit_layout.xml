@@ -56,7 +56,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_ac_tel"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|phone"
         app:layout_constraintEnd_toEndOf="@+id/edPrice"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edPrice"

@@ -1,6 +1,8 @@
 package ru.sergeev.tezodeer.abito;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
@@ -46,7 +48,7 @@ import ru.sergeev.tezodeer.abito.utils.MyConstants;
 
 public class EditActivity extends AppCompatActivity {
     private StorageReference mStorageRef;
-    private String[] uploadUri= new String[3];
+    private String[] uploadUri = new String[3];
     private Spinner spinner;
     private DatabaseReference dReference;
     private FirebaseAuth firebaseAuth;
@@ -78,7 +80,6 @@ public class EditActivity extends AppCompatActivity {
     private void init()
      {
         tvImagesCounter = findViewById(R.id.tvImagesCounter);
-
         imagesUris = new ArrayList<>();
         ViewPager vp = findViewById(R.id.view_pager);
         imAdapter = new ImageAdapter(this);
@@ -100,7 +101,6 @@ public class EditActivity extends AppCompatActivity {
 
             }
         });
-
         uploadUri[0] = "empty";
         uploadUri[1] = "empty";
         uploadUri[2] = "empty";
@@ -140,6 +140,7 @@ public class EditActivity extends AppCompatActivity {
         temp_image_url = i.getStringExtra(MyConstants.IMAGE_ID);
         temp_total_views = i.getStringExtra(MyConstants.TOTAL_VIEWS);
     }
+
     private void uploadImage() throws IOException {
 
         if(Build.VERSION.SDK_INT <= 28) {
@@ -153,7 +154,6 @@ public class EditActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
                     assert bitmap != null;
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out);
@@ -302,35 +302,44 @@ public class EditActivity extends AppCompatActivity {
     }
     public void onClickSavePost(View v) throws IOException {
         pd.show();
-        if(!edit_state)
-        {
-            uploadImage();
-        }
-        else
-        {
-            if(is_image_update = true)
+        if(!edTitle.getText().toString().equals("")) {
+            if(!edit_state)
             {
-                updateImage();
+                uploadImage();
             }
             else
             {
-                updatePost();
+                if(is_image_update = true)
+                {
+                    updateImage();
+                }
+                else
+                {
+                    updatePost();
+                }
             }
         }
+        else {
+            pd.dismiss();
+            Toast.makeText(this, "Введите название объявления!", Toast.LENGTH_SHORT).show();
+        }
+        
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        getContentResolver().getPersistedUriPermissions();
 
         Log.d("Mylog", "WubaWuba DabDab " + data);
         if(requestCode == 15 && data != null)
         {
+
             if (resultCode == RESULT_OK)
-            {
+            {;
                 uploadUri[0] = data.getStringExtra("uriMain");
                 uploadUri[1] = data.getStringExtra("uri2");
                 uploadUri[2] = data.getStringExtra("uri3");
+
                 imagesUris.clear();
                 for (String s : uploadUri)
                 {
@@ -351,8 +360,14 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+
     public void onClickChooseImage (View v) {
         Intent e = new Intent(this, ChooseImagesActivity.class);
+        e.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        e.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        e.addCategory(Intent.CATEGORY_OPENABLE);
+        e.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        e.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(e, 15);
     }
 
@@ -374,6 +389,7 @@ public class EditActivity extends AppCompatActivity {
             post.setTotal_views(temp_total_views);
             dReference.child(temp_key).child("anuncio").setValue(post);
             finish();
+        Toast.makeText(this, "Объявление обновлено!", Toast.LENGTH_SHORT).show();
     }
     private void savePost()
     {
@@ -387,10 +403,31 @@ public class EditActivity extends AppCompatActivity {
             post.setImageId2(uploadUri[1]);
             post.setImageId3(uploadUri[2]);
             post.setTitle(edTitle.getText().toString());
-            post.setTel(edTel.getText().toString());
-            post.setPrice(edPrice.getText().toString());
+
+            if(!edTel.getText().toString().equals("")) {
+                post.setTel(edTel.getText().toString());
+            }
+            else {
+                post.setTel("Не указан");
+            }
+
+
+            if(!edPrice.getText().toString().equals("")) {
+                post.setPrice(edPrice.getText().toString());
+            }
+            else {
+                post.setPrice("Договорная");
+            }
+
             post.setCat(spinner.getSelectedItem().toString());
-            post.setDisk(edDisc.getText().toString());
+
+            if(!edDisc.getText().toString().equals("")) {
+                post.setDisk(edDisc.getText().toString());
+            }
+            else {
+                post.setDisk("Описание отсутствует");
+            }
+
             post.setKey(key);
             post.setTime(String.valueOf(System.currentTimeMillis()));
             post.setUid(firebaseAuth.getUid());
@@ -403,6 +440,7 @@ public class EditActivity extends AppCompatActivity {
 
         }
         finish();
+        Toast.makeText(this, "Объявление опубликовано!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

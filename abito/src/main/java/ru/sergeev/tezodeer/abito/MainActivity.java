@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final int EDIT_RES = 12;
     private BannerAdView bannerAdView;
     private static final String YANDEX_AD_UNIT_ID = "demo-banner-yandex";
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void init()
     {
+        fab = findViewById(R.id.floatingActionButton2);
         setOnItemClickCustom();
         rcView = findViewById(R.id.recyclerView);
         rcView.setLayoutManager(new LinearLayoutManager(this));
@@ -209,6 +212,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClickEdit(View v)
     {
             Intent i = new Intent(MainActivity.this, EditActivity.class);
+            i.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            i.addCategory(Intent.CATEGORY_OPENABLE);
+            i.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            i.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivityForResult(i, EDIT_RES);
     }
     private void getUserData()
@@ -216,15 +224,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null)
         {
+            fab.setEnabled(true);
             userEmail.setText(currentUser.getEmail());
             MAUTH = mAuth.getUid();
         }
         else
         {
+            fab.setEnabled(false);
             userEmail.setText(R.string.sign_in_or_sign_up);
             MAUTH = "";
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -299,11 +310,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             getUserData();
+                            Toast.makeText(MainActivity.this, "Вы успешно зарегистрировались!", Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCustomToken:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(getApplicationContext(), "Ошибка при авторизации",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -323,10 +335,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             getUserData();
+                            Toast.makeText(MainActivity.this, "Успешный вход!", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCustomToken:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(getApplicationContext(), "Ошибка при авторизации",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -340,6 +353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         mAuth.signOut();
         getUserData();
+        Toast.makeText(this, "Вы вышли из аккаунта!", Toast.LENGTH_SHORT).show();
     }
     private void AddAds() {
         MobileAds.initialize(this, new InitializationListener() {
@@ -349,13 +363,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         bannerAdView = new BannerAdView(this);
         bannerAdView = findViewById(R.id.adView);
-
         AdRequest adRequest = new AdRequest.Builder().build();
-
-
         bannerAdView.setAdUnitId(YANDEX_AD_UNIT_ID);
         bannerAdView.setAdSize(AdSize.BANNER_320x100);
-
         bannerAdView.loadAd(adRequest);
     }
 }

@@ -2,9 +2,14 @@ package ru.sergeev.tezodeer.abito.screens;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.UriPermission;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,6 +43,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                 case 1:
                     uriMain = data.getData().toString();
                     imMain.setImageURI(data.getData());
+
                     break;
                 case 2:
                     uri2 = data.getData().toString();
@@ -62,18 +68,24 @@ public class ChooseImagesActivity extends AppCompatActivity {
     }
     public void onClickBack (View view) {
         Intent e = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        e.setType("iamge/*");
+        e.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        e.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        e.addCategory(Intent.CATEGORY_OPENABLE);
+        e.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         e.putExtra("uriMain",uriMain);
         e.putExtra("uri2",uri2);
         e.putExtra("uri3",uri3);
         setResult(RESULT_OK,e);
         finish();
     }
+
     private void getImage(int index)
     {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-        startActivityForResult(intent, index);
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.setType("image/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(intent, index);
     }
 
     @Override

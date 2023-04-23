@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -64,6 +67,8 @@ public class ShowLayoutActivity extends AppCompatActivity {
         if(getIntent() != null)
         {
             Intent i = getIntent();
+            String tel = i.getStringExtra(MyConstants.TEL);
+            i.setAction(Intent.ACTION_OPEN_DOCUMENT);
             tvTitle.setText(i.getStringExtra(MyConstants.TITLE));
             tvTel.setText(i.getStringExtra(MyConstants.TEL));
             tvPrice.setText(i.getStringExtra(MyConstants.PRICE));
@@ -76,6 +81,7 @@ public class ShowLayoutActivity extends AppCompatActivity {
             for (String s : images) {
                 if(!s.equals("empty"))imagesUris.add(s);
             }
+
             imAdapter.updateImages(imagesUris);
             String dataText;
 
@@ -92,5 +98,19 @@ public class ShowLayoutActivity extends AppCompatActivity {
 
             //Picasso.get().load(i.getStringExtra(MyConstants.IMAGE_ID)).into(imMain);
         }
+    }
+    public void getCall (View v)
+    {
+        Intent i = getIntent();
+        String tel = i.getStringExtra(MyConstants.TEL);
+        
+        if(tel.equals("Не указан")) {
+            Toast.makeText(this, "Номер не указан!", Toast.LENGTH_SHORT).show();
+        }
+        else  {
+            Intent call = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel));
+            startActivity(call);
+        }
+        
     }
 }
