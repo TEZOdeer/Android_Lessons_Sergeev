@@ -2,8 +2,10 @@
 <resources>
     <string-array name="category_spinner">
         <item>Машины</item>
+        <item>Одежда</item>
         <item>Компьютеры</item>
         <item>Смартфоны</item>
         <item>Бытовая техника</item>
+        <item>Услуги</item>
     </string-array>
 </resources>

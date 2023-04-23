@@ -249,6 +249,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 current_cat = "Машины";
                 dbManager.getDataFromDb("Машины");
                 break;
+            case R.id.id_cloth_ads:
+                current_cat = "Одежда";
+                dbManager.getDataFromDb("Одежда");
+                break;
             case R.id.id_pc_ads:
                 current_cat = "Компьютеры";
                 dbManager.getDataFromDb("Компьютеры");
@@ -260,6 +264,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.id_dm_ads:
                 current_cat = "Бытовая техника";
                 dbManager.getDataFromDb("Бытовая техника");
+                break;
+            case R.id.id_services_ads:
+                current_cat = "Услуги";
+                dbManager.getDataFromDb("Услуги");
                 break;
             case R.id.id_sign_up:
                 signUpDialog(R.string.sign_up,R.string.sign_up_button, 0);

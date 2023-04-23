@@ -32,7 +32,7 @@ public class DbManager {
     private FirebaseDatabase db;
     private int cat_ads_counter = 0;
     private FirebaseStorage fs;
-    private String[] category_ads = {"Машины", "Компьютеры", "Смартфоны", "Бытовая техника"};
+    private String[] category_ads = {"Машины", "Одежда", "Компьютеры", "Смартфоны", "Бытовая техника"};
 
     private int delete_image_counter = 0;
 
@@ -96,7 +96,7 @@ public class DbManager {
             @Override
             public void onFailure(@NonNull Exception e)
             {
-                Toast.makeText(contextDB, "An error occurred, image not deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(contextDB, "Произошла ошибка!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -113,7 +113,7 @@ public class DbManager {
             {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(contextDB , "An error occurred, item not deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(contextDB , "Произошла ошибка!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
