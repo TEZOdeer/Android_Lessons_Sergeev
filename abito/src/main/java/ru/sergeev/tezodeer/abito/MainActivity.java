@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DbManager dbManager;
     private Context contextDB;
     public static String MAUTH = "";
-    private String current_cat = "Машины";
+    private String current_cat = "Услуги";
     private NewPost newPost;
     private final int EDIT_RES = 12;
     private BannerAdView bannerAdView;

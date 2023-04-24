@@ -6,12 +6,12 @@
         <item android:title="@string/my_ads"
             android:id="@+id/id_my_ads"
             android:icon="@drawable/ic_my_ads"/>
-        <item android:title="@string/cloth_ads"
-            android:id="@+id/id_cloth_ads"
-            android:icon="@drawable/ic_cloth_ads"/>
         <item android:title="@string/cars_ads"
             android:id="@+id/id_cars_ads"
             android:icon="@drawable/ic_cars_ads"/>
+        <item android:title="@string/cloth_ads"
+            android:id="@+id/id_cloth_ads"
+            android:icon="@drawable/ic_cloth_ads"/>
         <item android:title="@string/pc_ads"
             android:id="@+id/id_pc_ads"
             android:icon="@drawable/ic_pc_ads"/>
