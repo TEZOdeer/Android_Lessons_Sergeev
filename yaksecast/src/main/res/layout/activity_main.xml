@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lists"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTintMode="add"
+    tools:context=".MainActivity"
+    tools:ignore="AdapterViewChildren">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/menu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_menu_icon" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9:00 AM"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/menu"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toEndOf="@+id/menu"
+                    app:layout_constraintTop_toTopOf="@+id/menu" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    app:layout_constraintEnd_toEndOf="@+id/menu"
+                    app:layout_constraintHorizontal_bias="0.562"
+                    app:layout_constraintStart_toStartOf="@+id/menu"
+                    app:layout_constraintTop_toBottomOf="@+id/menu"
+                    app:srcCompat="@android:drawable/btn_radio" />
+
+                <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="ClearSky"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="96dp"
+                    android:text="14C"
+                    android:textColor="#000000"
+                    android:textSize="60sp"
+                    app:layout_constraintEnd_toEndOf="@+id/temp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="128dp"
+            android:layout_weight="1"
+            android:background="@color/white_transperance">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/forecast"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Forecast"
+                            android:textColor="#FFFFFF" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView8"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        app:srcCompat="@drawable/test" />
+
+                                    <TextView
+                                        android:id="@+id/textView9"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="TextView" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/day0"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Saturday"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/day0_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test"
+                            tools:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/day0_min_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="9"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/day0_max_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="14"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/day1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Sunday"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/day1_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test"
+                            tools:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/day1_min_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="7"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/day1_max_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="8"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/day2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Monday"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/day2_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test"
+                            tools:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/day2_min_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="6"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/day2_max_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="15"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/day3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Tuesday"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/day3_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test"
+                            tools:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/day3_min_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="15"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/day3_max_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="27"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/day4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Wednesday"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/day4_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test"
+                            tools:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/day4_min_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/day4_max_temp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="28"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Wind"
+                        android:textColor="#FFFFFF" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textColor="#FFFFFF" />
+
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textColor="#FFFFFF" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Sunrise"
+                            android:textColor="#FFFFFF" />
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:src="@drawable/test" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Sunset"
+                            android:textColor="#FFFFFF" />
+                    </LinearLayout>
+                </TableRow>
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+</ScrollView>

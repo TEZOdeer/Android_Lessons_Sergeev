@@ -36,6 +36,7 @@
             <option value="$PROJECT_DIR$/ta" />
             <option value="$PROJECT_DIR$/tabbedactivity" />
             <option value="$PROJECT_DIR$/weather" />
+            <option value="$PROJECT_DIR$/yaksecast" />
           </set>
         </option>
       </GradleProjectSettings>
