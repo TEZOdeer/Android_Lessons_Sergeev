@@ -47,8 +47,7 @@
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@+id/menu"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.41"
-                    app:layout_constraintStart_toEndOf="@+id/menu"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/menu" />
 
                 <ImageView
@@ -103,7 +102,7 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/bottom_stroke"
@@ -126,9 +125,7 @@
 
                         <HorizontalScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:scrollbars="none">
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -146,7 +143,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvFore"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -154,7 +151,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imFore"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -162,7 +159,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForeTemp"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -178,7 +175,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -186,7 +183,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast2"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -194,7 +191,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -210,7 +207,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast3"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -218,7 +215,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast3"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -226,7 +223,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp3"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -242,7 +239,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast4"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -250,7 +247,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast4"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -258,7 +255,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp4"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -274,7 +271,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast5"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -282,7 +279,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast5"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -290,7 +287,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp5"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -306,7 +303,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast6"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -314,7 +311,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast6"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -322,7 +319,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp6"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -338,7 +335,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast7"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -346,7 +343,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast7"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -354,7 +351,7 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp7"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
@@ -370,7 +367,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView8"
+                                        android:id="@+id/tvForecast8"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="3dp"
@@ -378,7 +375,7 @@
                                         android:text="TextView" />
 
                                     <ImageView
-                                        android:id="@+id/imageView4"
+                                        android:id="@+id/imForecast8"
                                         android:layout_width="40dp"
                                         android:layout_height="40dp"
                                         android:layout_marginBottom="3dp"
@@ -386,76 +383,13 @@
                                         app:srcCompat="@drawable/test" />
 
                                     <TextView
-                                        android:id="@+id/textView9"
+                                        android:id="@+id/tvForecastTemp8"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="TextView" />
                                 </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/textView8"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="3dp"
-                                        android:layout_weight="1"
-                                        android:text="TextView" />
-
-                                    <ImageView
-                                        android:id="@+id/imageView4"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginBottom="3dp"
-                                        android:layout_weight="1"
-                                        app:srcCompat="@drawable/test" />
-
-                                    <TextView
-                                        android:id="@+id/textView9"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="TextView" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/textView8"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="3dp"
-                                        android:layout_weight="1"
-                                        android:text="TextView" />
-
-                                    <ImageView
-                                        android:id="@+id/imageView4"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginBottom="3dp"
-                                        android:layout_weight="1"
-                                        app:srcCompat="@drawable/test" />
-
-                                    <TextView
-                                        android:id="@+id/textView9"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="TextView" />
-                                </LinearLayout>
                             </LinearLayout>
                         </HorizontalScrollView>
 
@@ -781,7 +715,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/tvSunrise"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -796,7 +730,7 @@
                             android:src="@drawable/test" />
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/tvSunset"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
